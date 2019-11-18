@@ -9,13 +9,40 @@ layui.use(['form','layer','jquery'],function(){
         });
     })*/
 
-    //登录按钮
-    form.on("submit",function(data){
+    //表单提交之前
+    form.on("submit",function(datalayui){
         $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
         setTimeout(function(){
-            window.location.href = "../../index.jsp";
+            //window.location.href = "../../index.jsp";
+
+            //alert(data.field);
+
+            $.ajax({
+                type: 'post',//提交请求的类型
+                url: '/login', // ajax请求路径
+                /*data: {
+                    uname:data.field.uname,
+                    pwd:data.field.pwd
+                },*/
+                data:datalayui.field,//数据
+                success: function(data){
+                    if(data=='ok'){
+                        layer.msg('登录成功');
+                        window.location.href = "../../index.jsp";
+                    }else if(data=='pwderror'){
+
+                        datalayui.elem.innerText="登录";
+                        datalayui.elem.removeAttribute("disabled");
+                        datalayui.elem.classList.remove("layui-disabled");
+
+
+                        layer.msg('登录失败,账号或者密码错误');
+                    }
+                }
+            });
+
         },1000);
-        return false;
+        //return false;
     })
 
     //表单输入效果
