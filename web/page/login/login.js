@@ -8,6 +8,10 @@ layui.use(['form','layer','jquery'],function(){
             time:5000
         });
     })*/
+    
+    
+
+    
 
     //表单提交之前
     form.on("submit",function(datalayui){
@@ -44,6 +48,15 @@ layui.use(['form','layer','jquery'],function(){
         },1000);
         //return false;
     })
+
+
+    //验证码
+    $("img").click(function (){
+        //第二张图片是验证码更换图片
+        $("img").get(1).setAttribute("src","/code?timestamp=" + (new Date()).valueOf());
+    })
+
+
 
     //表单输入效果
     $(".loginBody .input-item").click(function(e){

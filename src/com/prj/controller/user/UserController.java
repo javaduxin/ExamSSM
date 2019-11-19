@@ -22,13 +22,17 @@ public class UserController {
             'X', 'Y', 'Z'};
 
 
+    //验证码
+    String strCode="";
+
+
     //登录
     @ResponseBody
     @RequestMapping("/login")
-    public String login(User user,HttpSession session){
+    public String login(User user,HttpSession session,String yzm){
 
 
-        if(user.getUname().equals("admin")&& user.getPwd().equals("123")){
+        if(user.getUname().equals("admin")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
 
             session.setAttribute("loginUser",user);
 
@@ -81,7 +85,10 @@ public class UserController {
             g.drawString(rand, 13*i+6, 28);
         }
         //将字符保存到session中用于前端的验证
-        session.setAttribute("authCode", strCode.toLowerCase());
+        //session.setAttribute("authCode", strCode.toLowerCase());
+        //给验证码赋值
+        this.strCode=strCode;
+
         g.dispose();
 
         ImageIO.write(image, "JPEG", response.getOutputStream());
