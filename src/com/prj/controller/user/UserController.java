@@ -1,5 +1,6 @@
 package com.prj.controller.user;
 
+import com.prj.entity.Role;
 import com.prj.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +35,33 @@ public class UserController {
 
         if(user.getUname().equals("admin")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
 
+            Role role=new Role();
+            role.setId(3);
+            role.setRname("管理员");
+
+            user.setRole(role);
+
             session.setAttribute("loginUser",user);
 
             return "ok";
         }
+
+
+        if(user.getUname().equals("小二郎")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
+
+            Role role=new Role();
+            role.setId(2);
+            role.setRname("学生");
+
+            user.setRole(role);
+
+            session.setAttribute("loginUser",user);
+
+            return "ok";
+        }
+
+
+
 
 
         return "pwderror";

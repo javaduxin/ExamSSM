@@ -18,11 +18,36 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 	function getData(json){
 		$.getJSON(tab.tabConfig.url,function(data){
 			if(json == "contentManagement"){
-				dataStr = data.contentManagement;
+
+				var contentManagement=[];
+
+				//管理员
+				if(sessionStorage.getItem("userRid")==3){
+                    contentManagement=data.contentManagement;
+				}
+				//学生
+				if(sessionStorage.getItem("userRid")==2){
+                    contentManagement.push(data.contentManagement[2]);
+				}
+
+
+				//加载考试管理中的左侧菜单
+
+				dataStr = contentManagement;
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "memberCenter"){
-				dataStr = data.memberCenter;
+
+                var contentManagement=[];
+                //管理员
+                if(sessionStorage.getItem("userRid")==3){
+                    contentManagement=data.memberCenter;
+                }
+                //学生
+                if(sessionStorage.getItem("userRid")==2){
+
+                }
+				dataStr = contentManagement;
 				//重新渲染左侧菜单
 				tab.render();
 			}else if(json == "systemeSttings"){
