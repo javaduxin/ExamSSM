@@ -60,7 +60,7 @@
 
 	<!--第一步：编写模版。你可以使用一个script标签存放模板，如：-->
 	<script type="text/html" id="demo">
-		{{#  layui.each(d, function(index, item){ }}
+		{{#  layui.each(d.list, function(index, item){ }}
         <table  class="layui-table mag0">
             <colgroup>
             <col>
@@ -74,23 +74,23 @@
         </thead>
         <tbody>
         <tr>
-        <td colspan="3"><p>{{d[index].title}}</p></td>
+        <td colspan="3"><p>{{d.list[index].title}}</p></td>
         </tr>
         <tr>
         <td>A:</td>
-        <td pc><input type="radio" name="choose1" value="1"></input>xxx</td>
+        <td pc><input type="radio" name="choose1" value="1"/>{{d.infos[index][0]}}</td>
         </tr>
         <tr>
         <td>B:</td>
-        <td pc><input type="radio" name="choose1" value="2"></input>haha</td>
+        <td pc><input type="radio" name="choose1" value="2"/>{{d.infos[index][1]}}</td>
         </tr>
         <tr>
         <td>C:</td>
-        <td pc><input type="radio" name="choose1" value="3"></input>ggg</td>
+        <td pc><input type="radio" name="choose1" value="3"/>{{d.infos[index][2]}}</td>
         </tr>
         <tr>
         <td>D:</td>
-        <td pc><input type="radio" name="choose1" value="4"></input>ooo</td>
+        <td pc><input type="radio" name="choose1" value="4"/>{{d.infos[index][3]}}</td>
         </tr>
         </tbody>
         </table>
@@ -147,10 +147,25 @@
                 url:"/queryExam/2",
                 success:function (jsondata) {
 
+
+                    var infos=[];
+
+                    for(var i=0;i<jsondata.length;i++){
+                        //答案数组
+                        var info= jsondata[i].info;
+                        infos.push(info.split('~'));
+					}
+                    var data = { //数据
+                        "list":jsondata
+                        ,"infos":infos
+                    }
+
+
+
                     //总题数
                     sumPage=jsondata.length;
 
-                    laytpl(getTpl).render(jsondata, function(html){
+                    laytpl(getTpl).render(data, function(html){
                         view.innerHTML = html;
                     });
 					//处理表格
