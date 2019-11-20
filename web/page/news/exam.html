@@ -15,7 +15,9 @@
 <body class="childrenBody">
 	<form class="layui-form">
 		<!--第二步：建立视图。用于呈现渲染结果。-->
-		<div id="view"></div>
+		<div id="view">
+
+		</div>
 
 
 		<div class="magt10 layui-center">
@@ -136,9 +138,10 @@
 		}
 
 
-		layui.use(["jquery","laytpl"],function (){
+		layui.use(["jquery","laytpl",'form'],function (){
 		    $= layui.jquery;
             laytpl= layui.laytpl;
+            form=layui.form;
             //layui
             var view = document.getElementById('view');//获取视图对象
             var getTpl = document.getElementById("demo").innerHTML;//获取模板对象中的html
@@ -179,7 +182,7 @@
                         view1.innerHTML = html;
                     });
 
-
+                    form.render();
                 }
             })
 
