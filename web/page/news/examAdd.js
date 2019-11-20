@@ -1,14 +1,33 @@
-layui.use(['form','layer','layedit','laydate','upload'],function(){
+layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
         upload = layui.upload,
         layedit = layui.layedit,
         laydate = layui.laydate,
+            transfer = layui.transfer,
         $ = layui.jquery;
 
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
+
+
+    //模拟班级数据
+    var data1 = [
+        {"value": "1", "title": "软件1805"}
+        ,{"value": "2", "title": "软件1804"}
+        ,{"value": "3", "title": "动漫1804"}
+        ,{"value": "4", "title": "新闻1801"}
+    ]
+
+    //加载穿梭框
+    //基础效果
+    transfer.render({
+        elem: '#test1',
+        title:["班级列表","选择考试班级"]
+        ,data: data1
+    })
+
 
 	 //拖拽上传
 	  upload.render({
