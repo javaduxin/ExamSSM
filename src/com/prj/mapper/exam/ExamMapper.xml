@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间必须是接口-->
+<mapper namespace="com.prj.mapper.exam.ExamMapper">
+
+    <select id="queryExam"  resultType="com.prj.entity.Exam" parameterType="int">
+      SELECT e.id,e.title,e.info FROM `menu` m,`exam` e WHERE e.mid=m.id AND m.id=#{mid}
+    </select>
+
+
+</mapper>

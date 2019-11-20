@@ -14,72 +14,10 @@
 </head>
 <body class="childrenBody">
 	<form class="layui-form">
-		<table id="tab1" class="layui-table mag0">
-			<colgroup>
-				<col>
-				<col width="100%">
-				<col>
-		    </colgroup>
-		    <thead>
-		    	<tr>
-		    		<th colspan="3">选择题:第1题</th>
-		    	</tr>
-		    </thead>
-		    <tbody>
-		    	<tr>
-		    		<td colspan="3"><p>面向对象是对象吗?</p></td>
-		    	</tr>
-		    	<tr>
-		    		<td>A:</td>
-		    		<td pc><input type="radio" name="choose1" value="1"></input>xxx</td>
-		    	</tr>
-		    	<tr>
-		    		<td>B:</td>
-		    		<td pc><input type="radio" name="choose1" value="2"></input>haha</td>
-		    	</tr>
-		    	<tr>
-		    		<td>C:</td>
-		    		<td pc><input type="radio" name="choose1" value="3"></input>ggg</td>
-		    	</tr>
-		    	<tr>
-		    		<td>D:</td>
-		    		<td pc><input type="radio" name="choose1" value="4"></input>ooo</td>
-		    	</tr>
-		    </tbody>
-		</table>
-		<table id="tab2" class="layui-table mag0">
-			<colgroup>
-				<col>
-				<col width="100%">
-				<col>
-		    </colgroup>
-		    <thead>
-		    	<tr>
-		    		<th colspan="3">选择题:第2题</th>
-		    	</tr>
-		    </thead>
-		    <tbody>
-		    	<tr>
-		    		<td colspan="3"><p>不属于面向对象三大特征?</p></td>
-		    	</tr>
-		    	<tr>
-		    		<td>A:</td>
-		    		<td pc><input type="radio" name="choose2" value="1"></input>封装</td>
-		    	</tr>
-		    	<tr>
-		    		<td>B:</td>
-		    		<td pc><input type="radio" name="choose2" value="2"></input>继承</td>
-		    	</tr>
-		    	<tr>
-		    		<td>C:</td>
-		    		<td pc><input type="radio" name="choose2" value="3"></input>多肽</td>
-		    	</tr>
-		    	<tr>
-		    		<td>D:</td>
-		    		<td pc><input type="radio" name="choose2" value="4"></input>接口</td>
-		    	</tr>
-		    </tbody>
-		</table>
+		<!--第二步：建立视图。用于呈现渲染结果。-->
+		<div id="view"></div>
+
+
 		<div class="magt10 layui-center">
 			<div class="layui-btn-container">
 				<button id="previousBtn" onclick="previous_Btn()"  type="button" class="layui-btn" lay-filter="previousBtn">上一题</button>
@@ -91,9 +29,7 @@
 		
 		<fieldset class="layui-elem-field layui-field-title">
 		  <legend>选择题</legend>
-		    <div class="layui-btn-container">
-			  <button type="button" onclick="show_page(0)" class="layui-btn">第1题</button> 
-			  <button type="button" onclick="show_page(1)" class="layui-btn">第2题</button> 
+		    <div id="btndemo" class="layui-btn-container">
 			</div>
 		</fieldset>
 		<fieldset class="layui-elem-field layui-field-title">
@@ -114,12 +50,59 @@
 	</blockquote>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="../../js/cache.js"></script>
-	
+
+	<script id="demo1" type="text/html">
+		{{#  layui.each(d, function(index, item){ }}
+		<button type="button" onclick="show_page({{index}})" class="layui-btn">第{{index+1}}题</button>
+		{{#  }); }}
+	</script>
+
+
+	<!--第一步：编写模版。你可以使用一个script标签存放模板，如：-->
+	<script type="text/html" id="demo">
+		{{#  layui.each(d, function(index, item){ }}
+        <table  class="layui-table mag0">
+            <colgroup>
+            <col>
+            <col width="100%">
+            <col>
+            </colgroup>
+            <thead>
+            <tr>
+            <th colspan="3">选择题:第{{index+1}}题</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td colspan="3"><p>{{d[index].title}}</p></td>
+        </tr>
+        <tr>
+        <td>A:</td>
+        <td pc><input type="radio" name="choose1" value="1"></input>xxx</td>
+        </tr>
+        <tr>
+        <td>B:</td>
+        <td pc><input type="radio" name="choose1" value="2"></input>haha</td>
+        </tr>
+        <tr>
+        <td>C:</td>
+        <td pc><input type="radio" name="choose1" value="3"></input>ggg</td>
+        </tr>
+        <tr>
+        <td>D:</td>
+        <td pc><input type="radio" name="choose1" value="4"></input>ooo</td>
+        </tr>
+        </tbody>
+        </table>
+		{{#  }); }}
+	</script>
+
+
 	
 	<script>
 		
 		var nowPage=0;
-		var sumPage=2;
+		var sumPage=0;//总共几道题
 		var hour=0;//时
 		var minute=0;// 分
 		var second=0;// 秒
@@ -127,7 +110,7 @@
 		
 		window.onload=function (){
 			
-			show_page(nowPage);
+
 			
 			var mytimeHtml=document.getElementById("mytime").innerHTML;
 			
@@ -151,7 +134,51 @@
 			
 			
 		}
-		
+
+
+		layui.use(["jquery","laytpl"],function (){
+		    $= layui.jquery;
+            laytpl= layui.laytpl;
+            //layui
+            var view = document.getElementById('view');//获取视图对象
+            var getTpl = document.getElementById("demo").innerHTML;//获取模板对象中的html
+
+            $.ajax({
+                url:"/queryExam/2",
+                success:function (jsondata) {
+
+                    //总题数
+                    sumPage=jsondata.length;
+
+                    laytpl(getTpl).render(jsondata, function(html){
+                        view.innerHTML = html;
+                    });
+					//处理表格
+                    show_page(nowPage);
+
+                    //加载按钮
+                    var view1 = document.getElementById('btndemo');//获取视图对象
+                    var getTpl1 = document.getElementById("demo1").innerHTML;//获取模板对象中的html
+
+                    laytpl(getTpl1).render(jsondata, function(html){
+                        view1.innerHTML = html;
+                    });
+
+
+                }
+            })
+
+
+
+		})
+
+
+
+
+
+
+
+
 		function previous_Btn(){
 			
 			if(nowPage <= 0){
