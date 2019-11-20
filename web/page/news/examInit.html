@@ -34,7 +34,16 @@
 		    	</tr>
 		    	<tr>
 		    		<td>考试名称</td>
-		    		<td pc>JAVA</td>
+		    		<td pc>
+						<label class="layui-form-label">请选择考试</label>
+						<div class="layui-input-inline">
+							<select name="modules" lay-verify="required" lay-search="">
+								<option value="1">java基础</option>
+								<option value="2">循环</option>
+								<option value="3">面向对象</option>
+							</select>
+						</div>
+					</td>
 		    	</tr>
 		    	<tr>
 		    		<td>考试时间</td>

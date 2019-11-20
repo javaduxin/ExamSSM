@@ -4,6 +4,15 @@ public class User {
     private String uname;
     private String pwd;
     private Role role;
+    private Classes classes;
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
 
     public Role getRole() {
         return role;

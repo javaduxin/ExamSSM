@@ -1,5 +1,6 @@
 package com.prj.controller.user;
 
+import com.prj.entity.Classes;
 import com.prj.entity.Role;
 import com.prj.entity.User;
 import org.springframework.stereotype.Controller;
@@ -47,14 +48,17 @@ public class UserController {
         }
 
 
-        if(user.getUname().equals("小二郎")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
+        if(user.getUname().equals("徐广杰")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
 
             Role role=new Role();
             role.setId(2);
             role.setRname("学生");
 
+            Classes classes=new Classes();
+            classes.setId(1);
+            classes.setClassesName("软件1805");
             user.setRole(role);
-
+            user.setClasses(classes);
             session.setAttribute("loginUser",user);
 
             return "ok";

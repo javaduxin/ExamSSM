@@ -223,9 +223,9 @@ CREATE TABLE `menu` (
 /*Data for the table `menu` */
 
 insert  into `menu`(`id`,`title`,`author`,`status`,`url`,`type`,`opentime`,`ispublic`,`istop`,`scoreTime`,`sumScore`) values
-(1,'java基础',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(2,'循环',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(3,'面向对象',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(1,'java基础',NULL,NULL,NULL,NULL,NULL,NULL,NULL,40,100),
+(2,'循环',NULL,NULL,NULL,NULL,NULL,NULL,NULL,60,100),
+(3,'面向对象',NULL,NULL,NULL,NULL,NULL,NULL,NULL,90,100),
 (4,'SSM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
 (5,'SSM整合',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
@@ -376,7 +376,7 @@ insert  into `user`(`id`,`uname`,`pwd`,`typeclass`,`url`,`rid`) values
 (11,'李瑞峰','123',0,NULL,NULL),
 (12,'徐广杰','123',1,'img.jpg',2),
 (13,'佘明亮','123',0,NULL,NULL),
-(14,'任超','123',0,NULL,NULL),
+(14,'任超','123',1,NULL,2),
 (15,'孙艺伟','123',0,NULL,NULL),
 (16,'姜宏','123',0,NULL,NULL),
 (17,'宁营营','123',0,NULL,NULL),
