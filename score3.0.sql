@@ -48,7 +48,8 @@ CREATE TABLE `classmenu` (
 insert  into `classmenu`(`classid`,`menuid`) values
 (1,1),
 (1,2),
-(1,3);
+(1,3),
+(2,3);
 
 /*Table structure for table `exam` */
 
@@ -208,7 +209,7 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `id` int(22) NOT NULL AUTO_INCREMENT,
   `title` varchar(222) DEFAULT NULL,
-  `author` varchar(222) DEFAULT NULL,
+  `author` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `url` varchar(500) DEFAULT NULL COMMENT '试题路径',
   `type` varchar(200) DEFAULT NULL COMMENT '试题类型',
@@ -218,7 +219,7 @@ CREATE TABLE `menu` (
   `scoreTime` int(11) DEFAULT NULL COMMENT '考试时间分钟',
   `sumScore` int(11) DEFAULT NULL COMMENT '总分',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `menu` */
 
@@ -227,7 +228,8 @@ insert  into `menu`(`id`,`title`,`author`,`status`,`url`,`type`,`opentime`,`ispu
 (2,'循环',NULL,NULL,NULL,NULL,NULL,NULL,NULL,60,100),
 (3,'面向对象',NULL,NULL,NULL,NULL,NULL,NULL,NULL,90,100),
 (4,'SSM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(5,'SSM整合',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+(5,'SSM整合',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(6,'茶文化考试',3,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `result` */
 
