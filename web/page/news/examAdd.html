@@ -20,7 +20,7 @@
 				<div class="layui-form-item magt3">
 					<label class="layui-form-label">试题名称</label>
 					<div class="layui-input-block">
-						<input type="text" class="layui-input newsName" lay-verify="newsName" placeholder="请输入试题名称">
+						<input type="text" name="title" class="layui-input newsName" lay-verify="newsName" placeholder="请输入试题名称">
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -40,12 +40,12 @@
 			<label class="layui-form-label">试题上传</label>
 			<div class="layui-input-block">
 				<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-				  <legend>拖拽上传</legend>
-				</fieldset> 
-				 
+					<legend>拖拽上传</legend>
+				</fieldset>
+
 				<div class="layui-upload-drag" id="test10">
-				  <i class="layui-icon"></i>
-				  <p>点击上传，或将文件拖拽到此处</p>
+					<i class="layui-icon"></i>
+					<p>点击上传，或将文件拖拽到此处</p>
 				</div>
 				<!--<textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="news_content"></textarea>-->
 			</div>
@@ -74,7 +74,7 @@
 				<div class="layui-input-block newsStatus">
 					<select name="status" lay-verify="required">
 						<option value="0">保存草稿</option>
-						<option value="1">等待审核</option>
+						<option value="1">正常使用</option>
 					</select>
 				</div>
 			</div>

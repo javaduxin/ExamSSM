@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间必须是接口-->
+<mapper namespace="com.prj.mapper.menu.MenuMapper">
+
+    <insert id="addMenu"   parameterType="Menu">
+        INSERT INTO menu(id,title,author,url) VALUES(#{id},#{title},#{author.id},#{url})
+    </insert>
+
+
+    <!--中间表-->
+    <insert id="addMenuClasses"   parameterType="Classmenu">
+        INSERT INTO `classmenu`(classid,menuid) VALUES(classid,menuid)
+    </insert>
+
+
+</mapper>

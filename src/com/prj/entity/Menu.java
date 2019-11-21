@@ -3,7 +3,7 @@ package com.prj.entity;
 
 public class Menu {
 
-  private int id;
+  private long id;
   private String title;
   private String author;
   private int status;
@@ -16,11 +16,11 @@ public class Menu {
   private int sumScore;
 
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 

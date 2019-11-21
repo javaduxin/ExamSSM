@@ -1,11 +1,11 @@
-layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
+layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],function(){
     var form = layui.form
-        layer = parent.layer === undefined ? layui.layer : top.layer,
+    layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
         upload = layui.upload,
         layedit = layui.layedit,
         laydate = layui.laydate,
-            transfer = layui.transfer,
+        transfer = layui.transfer,
         $ = layui.jquery;
 
     //用于同步编辑器内容到textarea
@@ -26,18 +26,19 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
         elem: '#test1',
         title:["班级列表","选择考试班级"]
         ,data: data1
+        ,id: 'classid' //定义索引
     })
 
 
-	 //拖拽上传
-	  upload.render({
-	    elem: '#test10'
-	    ,url: '/upload/'
-	    ,exts: 'xls|xlsx' //只允许上传Excel文件
-	    ,done: function(res){
-	      console.log(res)
-	    }
-	  });
+    //拖拽上传
+    upload.render({
+        elem: '#test10'
+        ,url: '/upload/'
+        ,exts: 'xls|xlsx' //只允许上传Excel文件
+        ,done: function(res){
+            console.log(res)
+        }
+    });
 
 
     //上传缩略图
@@ -85,20 +86,49 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
     form.verify({
         newsName : function(val){
             if(val == ''){
-                return "文章标题不能为空";
+                return "试题名称不能为空";
             }
         },
         content : function(val){
             if(val == ''){
-                return "文章内容不能为空";
+                return "试题说明不能为空";
             }
         }
     })
-    form.on("submit(addNews)",function(data){
+    form.on("submit(addNews)",function(datalayui){
         //截取文章内容中的一部分文字放入文章摘要
-        var abstract = layedit.getText(editIndex).substring(0,50);
+        //var abstract = layedit.getText(editIndex).substring(0,50);
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
+
+
+        //获得右侧数据
+        var classid = transfer.getData('classid');
+        var ids=[];
+
+        for(var i=0;i<classid.length;i++){
+            ids.push({"id":classid[i].value});
+        }
+
+
+
+        //添加考试试题
+        $.ajax({
+            url:"/addMenu",
+            type: 'post',//提交请求的类型
+            data:JSON.stringify({"menu":datalayui.field,"classesList":ids}),//数据
+            dataType: 'json',
+            contentType:"application/json",
+            success:function (data){
+                if(data=='ok'){
+                    layer.msg('添加成功');
+                }else if(data=='error'){
+                    layer.msg('添加失败');
+                }
+            }
+        })
+
+
         // 实际使用时的提交信息
         // $.post("上传路径",{
         //     newsName : $(".newsName").val(),  //文章标题
@@ -114,10 +144,10 @@ layui.use(['form','layer','layedit','laydate','upload','transfer'],function(){
         // })
         setTimeout(function(){
             top.layer.close(index);
-            top.layer.msg("文章添加成功！");
+            top.layer.msg("试题添加成功！");
             layer.closeAll("iframe");
             //刷新父页面
-            parent.location.reload();
+            //parent.location.reload();
         },500);
         return false;
     })
