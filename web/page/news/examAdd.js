@@ -35,7 +35,8 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
 
 
     //拖拽上传
-    var demoListView = $('#demoList')
+    var demoListView = $('#demoList');
+    var tr;
     upload.render({
         elem: '#test10'
         ,url: '/upload'
@@ -49,8 +50,15 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         choose: function(obj) {
             var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
             //读取本地文件
+
             obj.preview(function (index, file, result) {
-                var tr = $(['<tr id="upload-' + index + '">'
+
+                if($('#uploadid').length>=1){
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                }
+
+                 tr = $(['<tr id="uploadid">'
                     , '<td>' + file.name + '</td>'
                     , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
                     , '<td>上传成功</td>'
@@ -125,6 +133,11 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
             if(val == ''){
                 return "试题说明不能为空";
             }
+        },
+        fileName : function(val){
+            if($('#uploadid').length<1){
+                return "文件不能为空";
+            }
         }
     })
     form.on("submit(addNews)",function(datalayui){
@@ -142,7 +155,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
             ids.push({"id":classid[i].value});
         }
         //删除文件属性
-        delete datalayui.field.file;
+        delete datalayui.field.myfile;
 
         //添加考试试题
         //JSON.stringify把json对象转换成字符串
