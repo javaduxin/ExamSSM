@@ -137,6 +137,11 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
             if($('#uploadid').length<1){
                 return "文件不能为空";
             }
+        },
+        transferId : function(val){
+            if(transfer.getData('classid').length<=0){
+                return "考试班级不能为空";
+            }
         }
     })
     form.on("submit(addNews)",function(datalayui){
