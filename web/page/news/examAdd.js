@@ -34,6 +34,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
     upload.render({
         elem: '#test10'
         ,url: '/upload/'
+        ,field:"url"
         ,exts: 'xls|xlsx' //只允许上传Excel文件
         ,done: function(res){
             console.log(res)
@@ -102,7 +103,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
 
 
-        //获得右侧数据
+        //获得穿梭框右侧数据
         var classid = transfer.getData('classid');
         var ids=[];
 
@@ -113,12 +114,13 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
 
 
         //添加考试试题
+        //JSON.stringify把json对象转换成字符串
         $.ajax({
             url:"/addMenu",
             type: 'post',//提交请求的类型
             data:JSON.stringify({"menu":datalayui.field,"classesList":ids}),//数据
-            dataType: 'json',
-            contentType:"application/json",
+            dataType: 'json',//提交后台参数的类型
+            contentType:"application/json",//定义数据格式是json
             success:function (data){
                 if(data=='ok'){
                     layer.msg('添加成功');

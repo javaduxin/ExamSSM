@@ -3,25 +3,22 @@ package com.prj.entity;
 
 public class Classmenu {
 
-  private int classid;
-  private int menuid;
+  private Classes classes;
+  private Menu menu;
 
-
-  public int getClassid() {
-    return classid;
+  public Classes getClasses() {
+    return classes;
   }
 
-  public void setClassid(int classid) {
-    this.classid = classid;
+  public void setClasses(Classes classes) {
+    this.classes = classes;
   }
 
-
-  public int getMenuid() {
-    return menuid;
+  public Menu getMenu() {
+    return menu;
   }
 
-  public void setMenuid(int menuid) {
-    this.menuid = menuid;
+  public void setMenu(Menu menu) {
+    this.menu = menu;
   }
-
 }

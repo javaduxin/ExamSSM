@@ -11,7 +11,7 @@
 
     <!--中间表-->
     <insert id="addMenuClasses"   parameterType="Classmenu">
-        INSERT INTO `classmenu`(classid,menuid) VALUES(classid,menuid)
+        INSERT INTO `classmenu`(classid,menuid) VALUES(#{classes.id},#{menu.id})
     </insert>
 
 

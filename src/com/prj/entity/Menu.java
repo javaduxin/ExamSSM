@@ -7,7 +7,7 @@ public class Menu {
   private String title;
   private String author;
   private int status;
-  private String url;
+  private String url;//文件上传路径
   private String type;
   private java.sql.Timestamp opentime;
   private int ispublic;
