@@ -72,7 +72,6 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
                 tr.find('.demo-delete').on('click', function () {
                     delete files[index]; //删除对应的文件
                     tr.remove();
-                    uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
                 });
 
                 demoListView.append(tr);

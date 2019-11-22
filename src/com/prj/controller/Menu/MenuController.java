@@ -25,6 +25,8 @@ public class MenuController {
     @Autowired
     @Qualifier("MenuServerImpl")
     private MenuServer menuServer;
+    //上一次文件存储
+    private File lastFile;
 
     public MenuServer getMenuServer() {
         return menuServer;
@@ -41,12 +43,22 @@ public class MenuController {
         //判断用户是否选择文件
         //isEmpty()判断文件是否为空
         if(!myfile.isEmpty()){
+            //删除上一次文件
+            if(lastFile!=null){
+                lastFile.delete();
+            }
+
+
+
             //获取上传的服务器地址
             String url=request.getSession().getServletContext().getRealPath("/upload/");
             //创建文件对象getOriginalFilename()获取文件名称
-            File file=new File(url+myfile.getOriginalFilename());
+            File file=new File(url+System.currentTimeMillis()+myfile.getOriginalFilename());
             //把文件复制到目标地址FileUtils.copyInputStreamToFile(文件对象，目标地址对象)
             FileUtils.copyInputStreamToFile(myfile.getInputStream(),file);
+
+            //保留上一次文件
+            lastFile=file;
         }
         Map<String,Object> map = new HashMap<String,Object>();
         //返回json
@@ -61,6 +73,9 @@ public class MenuController {
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu){
+        //提交说明用户确认了文件删除上一次临时文件
+        lastFile=null;
+
        int i= menuServer.addMenu(classmenu);
 
        if(i>0){
