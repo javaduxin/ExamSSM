@@ -6,6 +6,10 @@ layui.use(['form','layer','jquery'],function(){
 
  	var systemParameter;
  	form.on("submit",function(data){
+ 		if(data.field.modules==-1){
+ 			layer.msg("请选择考试");
+			return false;
+		}
  		window.location.href = "exam.html";
  		return false;
  	})

@@ -197,7 +197,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
             top.layer.msg("试题添加成功！");
             layer.closeAll("iframe");
             //刷新父页面
-            //parent.location.reload();
+            parent.location.reload();
         },500);
         return false;
     })
