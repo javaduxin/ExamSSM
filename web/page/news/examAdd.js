@@ -1,4 +1,4 @@
-layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],function(){
+layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','element'],function(){
     var form = layui.form
     layer = parent.layer === undefined ? layui.layer : top.layer,
         laypage = layui.laypage,
@@ -6,11 +6,15 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
         layedit = layui.layedit,
         laydate = layui.laydate,
         transfer = layui.transfer,
+        element=layui.element,
         $ = layui.jquery;
 
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
 
+
+    //文件对象
+    var fileObj;
 
     //模拟班级数据
     var data1 = [
@@ -31,13 +35,40 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
 
 
     //拖拽上传
+    var demoListView = $('#demoList')
     upload.render({
         elem: '#test10'
-        ,url: '/upload/'
-        ,field:"url"
+        ,url: '/upload'
+        ,field:"myfile"
         ,exts: 'xls|xlsx' //只允许上传Excel文件
-        ,done: function(res){
-            console.log(res)
+        ,done: function(res, index, upload){
+            if(res.code==200){
+                layer.msg('上传成功');
+            }
+        },
+        choose: function(obj) {
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+            obj.preview(function (index, file, result) {
+                var tr = $(['<tr id="upload-' + index + '">'
+                    , '<td>' + file.name + '</td>'
+                    , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                    , '<td>上传成功</td>'
+                    , '<td>'
+                    , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                    , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                    , '</td>'
+                    , '</tr>'].join(''));
+
+                //删除
+                tr.find('.demo-delete').on('click', function () {
+                    delete files[index]; //删除对应的文件
+                    tr.remove();
+                    uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                });
+
+                demoListView.append(tr);
+            });
         }
     });
 
@@ -110,8 +141,8 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery'],func
         for(var i=0;i<classid.length;i++){
             ids.push({"id":classid[i].value});
         }
-
-
+        //删除文件属性
+        delete datalayui.field.file;
 
         //添加考试试题
         //JSON.stringify把json对象转换成字符串

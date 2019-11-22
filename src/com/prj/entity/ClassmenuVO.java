@@ -1,5 +1,7 @@
 package com.prj.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 //临时实体类
 public class ClassmenuVO {

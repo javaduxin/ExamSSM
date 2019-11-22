@@ -20,4 +20,15 @@
     <mvc:resources mapping="/json/**" location="/json/" />
     <mvc:resources mapping="/layui/**" location="/layui/" />
     <mvc:resources mapping="/page/**" location="/page/" />
+
+    <!--配置文件上传-->
+    <!--id必须叫multipartResolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--限制文件上传大小-->
+        <property name="maxUploadSize" value="5000000"/>
+        <!--设置文件编码集-->
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+
 </beans>

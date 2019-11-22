@@ -1,6 +1,10 @@
 package com.prj.entity;
 
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+
 public class Menu {
 
   private long id;
@@ -14,6 +18,7 @@ public class Menu {
   private int istop;
   private int scoreTime;
   private int sumScore;
+
 
 
   public long getId() {
