@@ -46,10 +46,8 @@ public class MenuController {
             //删除上一次文件
             if(lastFile!=null){
                 lastFile.delete();
+                lastFile=null;
             }
-
-
-
             //获取上传的服务器地址
             String url=request.getSession().getServletContext().getRealPath("/upload/");
             //创建文件对象getOriginalFilename()获取文件名称
@@ -72,13 +70,14 @@ public class MenuController {
     //@ResponseBody响应json到页面，@RequestBody从页面提交json到后台
     @ResponseBody
     @RequestMapping("/addMenu")
-    public String addMenu(@RequestBody ClassmenuVO classmenu){
-        //提交说明用户确认了文件删除上一次临时文件
-        lastFile=null;
-
-       int i= menuServer.addMenu(classmenu);
+    public String addMenu(@RequestBody ClassmenuVO classmenu) throws Exception{
+       int i= menuServer.addMenu(classmenu,lastFile);
 
        if(i>0){
+
+           //提交说明用户确认了文件删除上一次临时文件
+           lastFile=null;
+
            return "ok";
        }
 

@@ -158,7 +158,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         for(var i=0;i<classid.length;i++){
             ids.push({"id":classid[i].value});
         }
-        //删除文件属性
+        //删除文件name属性
         delete datalayui.field.myfile;
 
         //添加考试试题

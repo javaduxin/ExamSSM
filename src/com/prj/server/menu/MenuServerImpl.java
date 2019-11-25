@@ -1,13 +1,18 @@
 package com.prj.server.menu;
 
-import com.prj.entity.Classes;
-import com.prj.entity.Classmenu;
-import com.prj.entity.ClassmenuVO;
-import com.prj.entity.Menu;
+import com.prj.entity.*;
+import com.prj.mapper.exam.ExamMapper;
 import com.prj.mapper.menu.MenuMapper;
+import com.prj.server.exam.ExamServer;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("MenuServerImpl")
@@ -15,7 +20,18 @@ public class MenuServerImpl implements MenuServer{
 
 
     @Autowired
-    private MenuMapper menuMapper;
+    private MenuMapper menuMapper;//科目
+
+    @Autowired
+    private ExamMapper examMapper;//试题
+
+    public ExamMapper getExamMapper() {
+        return examMapper;
+    }
+
+    public void setExamMapper(ExamMapper examMapper) {
+        this.examMapper = examMapper;
+    }
 
     public MenuMapper getMenuMapper() {
         return menuMapper;
@@ -27,7 +43,7 @@ public class MenuServerImpl implements MenuServer{
 
     //添加试题并且添加班级列表
     @Override
-    public int addMenu(ClassmenuVO classmenu) {
+    public int addMenu(ClassmenuVO classmenu, File file) throws Exception {
 
         //生成科目ID
         long mid=System.currentTimeMillis();
@@ -55,6 +71,69 @@ public class MenuServerImpl implements MenuServer{
                 //向数据库添加中间表信息
                 this.addMenuClasses(classmenu1);
             }
+            //=====读取excel开始====
+
+            //新式题集合
+            List<Exam> examList=new ArrayList<Exam>();
+            //读取文件信息
+            XSSFWorkbook xwb = new XSSFWorkbook(new FileInputStream(file));
+            // 读取第一章表格内容
+            XSSFSheet sheet = xwb.getSheetAt(0);
+            // 定义 row、cell
+            XSSFRow row;
+            String cell;
+            // 循环输出表格中的内容
+            //循环行
+            for (int x = sheet.getFirstRowNum()+1; x < sheet.getPhysicalNumberOfRows(); x++) {
+
+                //新试题对象
+                Exam exam=new Exam();
+                //A B C D选择
+                String info="";
+
+                row = sheet.getRow(x);
+                //循环列
+                for (int z = row.getFirstCellNum(); z < row.getPhysicalNumberOfCells(); z++) {
+
+
+                    // 通过 row.getCell(j).toString() 获取单元格内容，
+                    if(row.getCell(z)!=null){
+                        cell = row.getCell(z).toString();
+                        //读取excel文件中的列插入集合中
+                        switch (z){
+                            case 0://试题小标题
+                                exam.setTitle(cell);
+                                break;
+                            case 1://一下是abcd选项
+                                info+=(cell);
+                                break;
+                            case 2:
+                            case 3:
+                                info+=("~"+cell+"~");
+                                break;
+                            case 4:
+                                info+=(cell);
+                                exam.setInfo(info);
+                                break;
+                            case 5://正确答案
+                                exam.setAnswer(cell);
+                                break;
+                        }
+
+                        //System.out.print(cell + "\t");
+                    }
+                }
+                examList.add(exam);
+            }
+            //=====读取excel结束====
+
+            //循环添加试题
+            for(int index=0;index<examList.size();index++){
+                examList.get(i).setMid(mid);//指定mid科目外键
+                examMapper.addExam(examList.get(i));
+            }
+
+
         }
         return i;
     }

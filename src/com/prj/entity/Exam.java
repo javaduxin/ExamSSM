@@ -7,9 +7,16 @@ public class Exam {
   private String title;
   private String info;
   private String answer;
-  private int mid;
+  private long mid;
   private String imgUrl;
 
+  public long getMid() {
+    return mid;
+  }
+
+  public void setMid(long mid) {
+    this.mid = mid;
+  }
 
   public int getId() {
     return id;
@@ -47,13 +54,7 @@ public class Exam {
   }
 
 
-  public int getMid() {
-    return mid;
-  }
 
-  public void setMid(int mid) {
-    this.mid = mid;
-  }
 
 
   public String getImgUrl() {

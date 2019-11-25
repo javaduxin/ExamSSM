@@ -8,5 +8,8 @@
       SELECT e.id,e.title,e.info FROM `menu` m,`exam` e WHERE e.mid=m.id AND m.id=#{mid}
     </select>
 
+    <insert id="addExam" parameterType="com.prj.entity.Exam" >
+        insert into `exam`(title,info,answer) values(#{title},#{info},#{answer})
+    </insert>
 
 </mapper>

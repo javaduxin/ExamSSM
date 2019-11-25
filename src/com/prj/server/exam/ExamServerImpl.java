@@ -24,4 +24,9 @@ public class ExamServerImpl implements ExamServer{
     public List<Exam> queryExam(int mid) {
         return examMapper.queryExam(mid);
     }
+
+    @Override
+    public int addExam(Exam exam) {
+        return examMapper.addExam(exam);
+    }
 }
