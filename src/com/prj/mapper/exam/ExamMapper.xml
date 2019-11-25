@@ -4,12 +4,12 @@
 <!--命名空间必须是接口-->
 <mapper namespace="com.prj.mapper.exam.ExamMapper">
 
-    <select id="queryExam"  resultType="com.prj.entity.Exam" parameterType="int">
+    <select id="queryExam"  resultType="com.prj.entity.Exam" parameterType="long">
       SELECT e.id,e.title,e.info FROM `menu` m,`exam` e WHERE e.mid=m.id AND m.id=#{mid}
     </select>
 
     <insert id="addExam" parameterType="com.prj.entity.Exam" >
-        insert into `exam`(title,info,answer) values(#{title},#{info},#{answer})
+        insert into `exam`(title,info,answer,mid) values(#{title},#{info},#{answer},#{menu.id})
     </insert>
 
 </mapper>

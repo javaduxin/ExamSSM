@@ -30,7 +30,7 @@ public class ExamController {
     //查询考试
     @ResponseBody
     @RequestMapping("/queryExam/{mid}")
-    public List<Exam> queryExam(@PathVariable int mid){
+    public List<Exam> queryExam(@PathVariable long mid){
         return examServer.queryExam(mid);
     }
 

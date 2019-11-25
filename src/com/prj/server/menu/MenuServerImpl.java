@@ -108,11 +108,13 @@ public class MenuServerImpl implements MenuServer{
                                 info+=(cell);
                                 break;
                             case 2:
+                                info+=("~"+cell);
+                                break;
                             case 3:
-                                info+=("~"+cell+"~");
+                                info+=("~"+cell);
                                 break;
                             case 4:
-                                info+=(cell);
+                                info+=("~"+cell);
                                 exam.setInfo(info);
                                 break;
                             case 5://正确答案
@@ -129,8 +131,12 @@ public class MenuServerImpl implements MenuServer{
 
             //循环添加试题
             for(int index=0;index<examList.size();index++){
-                examList.get(i).setMid(mid);//指定mid科目外键
-                examMapper.addExam(examList.get(i));
+
+                Menu menu=new Menu();
+                menu.setId(mid);//指定mid科目外键
+                examList.get(index).setMenu(menu);
+
+                examMapper.addExam(examList.get(index));
             }
 
 

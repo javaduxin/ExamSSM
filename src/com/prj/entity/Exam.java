@@ -7,15 +7,15 @@ public class Exam {
   private String title;
   private String info;
   private String answer;
-  private long mid;
+  private Menu menu;
   private String imgUrl;
 
-  public long getMid() {
-    return mid;
+  public Menu getMenu() {
+    return menu;
   }
 
-  public void setMid(long mid) {
-    this.mid = mid;
+  public void setMenu(Menu menu) {
+    this.menu = menu;
   }
 
   public int getId() {

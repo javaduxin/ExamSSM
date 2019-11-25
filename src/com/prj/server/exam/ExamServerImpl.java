@@ -21,7 +21,7 @@ public class ExamServerImpl implements ExamServer{
     }
     //查询考试信息
     @Override
-    public List<Exam> queryExam(int mid) {
+    public List<Exam> queryExam(long mid) {
         return examMapper.queryExam(mid);
     }
 
