@@ -22,7 +22,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 				var contentManagement=[];
 
 				//管理员
-				if(sessionStorage.getItem("userRid")==3){
+				if(sessionStorage.getItem("userRid")==1){
                     contentManagement=data.contentManagement;
 				}
 				//学生

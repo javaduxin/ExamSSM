@@ -1,10 +1,19 @@
 package com.prj.entity;
 
 public class User {
+    private int id;
     private String uname;
     private String pwd;
     private Role role;
     private Classes classes;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Classes getClasses() {
         return classes;

@@ -3,6 +3,9 @@ package com.prj.controller.user;
 import com.prj.entity.Classes;
 import com.prj.entity.Role;
 import com.prj.entity.User;
+import com.prj.server.user.UserServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +20,18 @@ import java.util.Random;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    @Qualifier("UserServerImpl")
+    private UserServer userServer;
+
+    public UserServer getUserServer() {
+        return userServer;
+    }
+
+    public void setUserServer(UserServer userServer) {
+        this.userServer = userServer;
+    }
 
     //验证码随机内容
     private char[] codeSequence = { 'A', '1','B', 'C', '2','D','3', 'E','4', 'F', '5','G','6', 'H', '7','I', '8','J',
@@ -34,39 +49,14 @@ public class UserController {
     public String login(User user,HttpSession session,String yzm){
 
 
-        if(user.getUname().equals("admin")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
+        User loginUser= userServer.login(user);
+        //strCode自己生成的验证码，yzm用户提交的验证码
+        if(loginUser!=null&&yzm.equals(strCode)){
 
-            Role role=new Role();
-            role.setId(3);
-            role.setRname("管理员");
-
-            user.setRole(role);
-
-            session.setAttribute("loginUser",user);
-
+            //登录成功把用户信息存入session
+            session.setAttribute("loginUser",loginUser);
             return "ok";
         }
-
-
-        if(user.getUname().equals("徐广杰")&& user.getPwd().equals("123") && strCode.equals(yzm) ){
-
-            Role role=new Role();
-            role.setId(2);
-            role.setRname("学生");
-
-            Classes classes=new Classes();
-            classes.setId(1);
-            classes.setClassesName("软件1805");
-            user.setRole(role);
-            user.setClasses(classes);
-            session.setAttribute("loginUser",user);
-
-            return "ok";
-        }
-
-
-
-
 
         return "pwderror";
     }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间必须是接口-->
+<mapper namespace="com.prj.mapper.user.UserMapper">
+
+    <!--用户map-->
+    <resultMap id="userMap" type="User">
+        <id column="id" property="id"></id>
+        <result column="uname" property="uname"></result>
+        <association property="role" resultMap="roleMap" javaType="Role"></association>
+        <association property="classes" resultMap="ClassMap" javaType="Classes"></association>
+    </resultMap>
+
+    <!--角色map-->
+    <resultMap id="roleMap" type="Role">
+        <id column="rid" property="id"></id>
+    </resultMap>
+    <!--班级map-->
+    <resultMap id="ClassMap" type="Classes">
+        <id column="cid" property="id"></id>
+    </resultMap>
+
+    <!--登录-->
+    <select id="login" resultMap="userMap" parameterType="User">
+        SELECT u.*,r.id rid,c.id cid FROM `user` u,role r,classes c WHERE u.rid=r.id AND c.id=u.typeclass AND  uname=#{uname} AND pwd=#{pwd}
+    </select>
+
+</mapper>
