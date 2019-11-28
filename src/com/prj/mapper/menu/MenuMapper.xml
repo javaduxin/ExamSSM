@@ -4,8 +4,28 @@
 <!--命名空间必须是接口-->
 <mapper namespace="com.prj.mapper.menu.MenuMapper">
 
+
+    <resultMap id="menuMap" type="Menu">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="ispublic" property="ispublic"></result>
+        <result column="istop" property="istop"></result>
+        <result column="opentime" property="opentime"></result>
+        <association property="author" resultMap="userMap" javaType="Integer"></association>
+    </resultMap>
+
+    <resultMap id="userMap" type="User">
+        <id column="uid" property="id"></id>
+        <result column="uname" property="uname"></result>
+    </resultMap>
+
+    <select id="queryMenu" resultMap="menuMap">
+        SELECT m.id,m.title,u.uname,m.ispublic,m.istop,m.opentime,u.id uid FROM `menu` m,USER u WHERE m.author=u.id ORDER BY m.istop DESC
+    </select>
+
+
     <insert id="addMenu"   parameterType="Menu">
-        INSERT INTO menu(id,title,author,url) VALUES(#{id},#{title},#{author.id},#{url})
+        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime) VALUES(#{id},#{title},#{author},#{url},#{ispublic},#{istop},(SELECT NOW()))
     </insert>
 
 

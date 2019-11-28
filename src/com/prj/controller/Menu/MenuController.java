@@ -1,6 +1,7 @@
 package com.prj.controller.Menu;
 
 import com.prj.entity.ClassmenuVO;
+import com.prj.entity.Menu;
 import com.prj.server.menu.MenuServer;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -71,6 +73,11 @@ public class MenuController {
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu) throws Exception{
+        //判断当前试题是否置顶
+        if(classmenu.getMenu().getIstop()!=1){
+            classmenu.getMenu().setIstop(0);
+        }
+
        int i= menuServer.addMenu(classmenu,lastFile);
 
        if(i>0){
@@ -83,4 +90,21 @@ public class MenuController {
 
        return "error";
     }
+
+
+
+    //查询科目信息
+    @ResponseBody
+    @RequestMapping("/queryMenu")
+    public Map<String,Object> queryMenu(){
+
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code","0");
+        map.put("data",menuServer.queryMenu());
+
+        return map;
+    }
+
+
+
 }

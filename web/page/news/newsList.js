@@ -9,26 +9,47 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     //新闻列表
     var tableIns = table.render({
         elem: '#newsList',
-        url : '../../json/newsList.json',
+        url : '/queryMenu',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
         limit : 20,
         limits : [10,15,20,25],
-        id : "newsListTable",
+        //id : "newsListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'newsId', title: 'ID', width:60, align:"center"},
-            {field: 'newsName', title: '试题名称', width:350},
-            {field: 'newsAuthor', title: '发布者', align:'center'},
-            {field: 'newsStatus', title: '发布状态',  align:'center',templet:"#newsStatus"},
-            {field: 'newsLook', title: '浏览权限', align:'center'},
-            {field: 'newsTop', title: '是否置顶', align:'center', templet:function(d){
-                return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" '+d.newsTop+'>'
+            {field: 'id', title: 'ID', width:60, align:"center"},
+            {field: 'title', title: '试题名称', width:350},
+            {field: 'author', title: '发布者', align:'center', templet:function(d){
+                    return d.author.uname;
             }},
-            {field: 'newsTime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
-                return d.newsTime.substring(0,10);
+            {field: 'ispublic', title: '发布状态',  align:'center', templet:function(d){
+                    var str="私密浏览";
+                    if(d==1){
+                        str="公开浏览"
+                    }
+
+                    return str;
+                }},
+            {field: 'newsLook', title: '浏览权限', align:'center', templet:function(d){
+                    var str="私密浏览";
+                    if(d.ispublic==1){
+                        str="公开浏览"
+                    }
+
+                    return str;
+                }},
+            {field: 'istop', title: '是否置顶', align:'center', templet:function(d){
+
+                if(d.istop==1){
+                    return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" checked>'
+                }else {
+                    return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否">'
+                }
             }},
+            /*{field: 'opentime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
+                return d.substring(0,10);
+            }},*/
             {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });

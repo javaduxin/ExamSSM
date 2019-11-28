@@ -19,8 +19,11 @@
 		<div class="layui-row layui-col-space10">
 			<div class="layui-col-md9 layui-col-xs7">
 				<div class="layui-form-item magt3">
+					<!--当前登录者-->
+
 					<label class="layui-form-label">试题名称</label>
 					<div class="layui-input-block">
+						<input name="author" type="hidden" id="author.id">
 						<input type="text" name="title" class="layui-input newsName" lay-verify="newsName" placeholder="请输入试题名称">
 					</div>
 				</div>
@@ -111,14 +114,14 @@
 			<div class="layui-form-item openness">
 				<label class="layui-form-label"><i class="seraph icon-look"></i> 公开度</label>
 				<div class="layui-input-block">
-					<input type="radio"  title="开放浏览" lay-skin="primary" checked />
-					<input type="radio"  title="私密浏览" lay-skin="primary" />
+					<input type="radio" name="ispublic" value="1" title="开放浏览" lay-skin="primary" checked />
+					<input type="radio" name="ispublic" value="0" title="私密浏览" lay-skin="primary" />
 				</div>
 			</div>
 			<div class="layui-form-item newsTop">
 				<label class="layui-form-label"><i class="seraph icon-zhiding"></i> 置　顶</label>
 				<div class="layui-input-block">
-					<input type="checkbox"  lay-skin="switch" lay-text="是|否">
+					<input type="checkbox" name="istop" value="1"  lay-skin="switch" lay-text="是|否">
 				</div>
 			</div>
 			<hr class="layui-bg-gray" />

@@ -148,4 +148,9 @@ public class MenuServerImpl implements MenuServer{
     public int addMenuClasses(Classmenu classesmenu) {
         return menuMapper.addMenuClasses(classesmenu);
     }
+
+    @Override
+    public List<Menu> queryMenu() {
+        return menuMapper.queryMenu();
+    }
 }

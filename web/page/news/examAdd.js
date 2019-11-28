@@ -13,6 +13,10 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
     layedit.sync(editIndex);
 
 
+    //获取当前登录者的ID
+    document.getElementById("author.id").value=sessionStorage.getItem("uid");
+
+
     //文件对象
     var fileObj;
 
@@ -151,6 +155,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
 
 
+
         //获得穿梭框右侧数据
         var classid = transfer.getData('classid');
         var ids=[];
@@ -160,6 +165,8 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         }
         //删除文件name属性
         delete datalayui.field.myfile;
+
+
 
         //添加考试试题
         //JSON.stringify把json对象转换成字符串
