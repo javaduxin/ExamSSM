@@ -13,8 +13,6 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
     layedit.sync(editIndex);
 
 
-    //获取当前登录者的ID
-    document.getElementById("author.id").value=sessionStorage.getItem("uid");
 
 
     //文件对象
@@ -166,6 +164,8 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         //删除文件name属性
         delete datalayui.field.myfile;
 
+        //获取登录用户信息
+        datalayui.field.author={id:sessionStorage.getItem("uid")};
 
 
         //添加考试试题

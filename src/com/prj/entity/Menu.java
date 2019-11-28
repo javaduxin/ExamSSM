@@ -1,9 +1,10 @@
 package com.prj.entity;
 
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
+
 
 public class Menu {
 

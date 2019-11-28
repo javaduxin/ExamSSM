@@ -25,7 +25,7 @@
 
 
     <insert id="addMenu"   parameterType="Menu">
-        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime) VALUES(#{id},#{title},#{author},#{url},#{ispublic},#{istop},(SELECT NOW()))
+        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime) VALUES(#{id},#{title},#{author.id},#{url},#{ispublic},#{istop},(SELECT NOW()))
     </insert>
 
 
