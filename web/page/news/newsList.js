@@ -47,9 +47,10 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否">'
                 }
             }},
-            /*{field: 'opentime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
-                return d.substring(0,10);
-            }},*/
+            {field: 'opentime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
+                var date=new Date(d.opentime);
+                return date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes();
+            }},
             {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
     });
