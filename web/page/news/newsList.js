@@ -49,7 +49,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             }},
             {field: 'opentime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
                 var date=new Date(d.opentime);
-                return date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes();
+                return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes();
             }},
             {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
         ]]
