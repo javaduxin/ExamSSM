@@ -19,6 +19,12 @@
         <result column="uname" property="uname"></result>
     </resultMap>
 
+
+    <update id="updateIsTop">
+        UPDATE `menu` SET istop=#{istop} WHERE id=#{id}
+    </update>
+
+
     <select id="queryMenu" resultMap="menuMap">
         SELECT m.id,m.title,u.uname,m.ispublic,m.istop,m.opentime,u.id uid FROM `menu` m,USER u WHERE m.author=u.id ORDER BY m.istop DESC
     </select>

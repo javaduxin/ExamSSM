@@ -153,4 +153,9 @@ public class MenuServerImpl implements MenuServer{
     public List<Menu> queryMenu() {
         return menuMapper.queryMenu();
     }
+
+    @Override
+    public int updateIsTop(long id, int istop) {
+        return menuMapper.updateIsTop(id, istop);
+    }
 }

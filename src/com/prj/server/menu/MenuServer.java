@@ -19,5 +19,6 @@ public interface MenuServer {
 
     //查询考试科目
     public List<Menu> queryMenu();
-
+    //修改置顶
+    public int updateIsTop(long id,int istop);
 }

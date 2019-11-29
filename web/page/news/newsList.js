@@ -42,9 +42,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             {field: 'istop', title: '是否置顶', align:'center', templet:function(d){
 
                 if(d.istop==1){
-                    return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" checked>'
+                    return '<input type="checkbox"  lay-filter="newsTop" lay-skin="switch" lay-text="是|否" checked>'
                 }else {
-                    return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否">'
+                    return '<input type="checkbox"  lay-filter="newsTop" lay-skin="switch" lay-text="是|否">'
                 }
             }},
             {field: 'opentime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
@@ -56,15 +56,27 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     });
 
     //是否置顶
-    form.on('switch(newsTop)', function(data){
+    table.on('row', function(obj){
+        var data = obj.data;
         var index = layer.msg('修改中，请稍候',{icon: 16,time:false,shade:0.8});
         setTimeout(function(){
             layer.close(index);
-            if(data.elem.checked){
-                layer.msg("置顶成功！");
-            }else{
-                layer.msg("取消置顶成功！");
-            }
+
+            $.ajax({
+                url:"/updateIsTop/"+data.id+"/"+data.istop,
+                success:function (data){
+
+                    if(data=="ok"){
+                        layer.msg("修改成功！");
+                    }else{
+                        layer.msg("修改失败！");
+                    }
+
+                }
+            })
+
+
+
         },500);
     })
 

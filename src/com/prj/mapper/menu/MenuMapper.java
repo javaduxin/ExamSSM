@@ -2,6 +2,7 @@ package com.prj.mapper.menu;
 
 import com.prj.entity.Classmenu;
 import com.prj.entity.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,7 @@ public interface MenuMapper {
 
     //添加科目表与班级表中间表
     public int addMenuClasses(Classmenu classesmenu);
+
+    //修改置顶
+    public int updateIsTop(@Param("id") long id,@Param("istop") int istop);
 }

@@ -7,10 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -103,6 +100,23 @@ public class MenuController {
         map.put("data",menuServer.queryMenu());
 
         return map;
+    }
+
+
+    //修改是否置顶
+    @RequestMapping("/updateIsTop/{id}/{istop}")
+    public String updateIsTop(@PathVariable long id,@PathVariable int istop){
+
+        //用户修改是否置顶
+        if(istop==0){
+            istop=1;
+        }else {
+            istop=0;
+        }
+
+        menuServer.updateIsTop(id,istop);
+
+        return "err";
     }
 
 
