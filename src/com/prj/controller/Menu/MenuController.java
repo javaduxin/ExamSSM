@@ -104,6 +104,7 @@ public class MenuController {
 
 
     //修改是否置顶
+    @ResponseBody
     @RequestMapping("/updateIsTop/{id}/{istop}")
     public String updateIsTop(@PathVariable long id,@PathVariable int istop){
 
@@ -116,7 +117,7 @@ public class MenuController {
 
         menuServer.updateIsTop(id,istop);
 
-        return "err";
+        return "ok";
     }
 
 
