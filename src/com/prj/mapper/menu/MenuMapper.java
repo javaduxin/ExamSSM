@@ -11,7 +11,7 @@ public interface MenuMapper {
 
 
     //查询考试科目
-    public List<Menu> queryMenu();
+    public List<Menu> queryMenu(@Param("title") String title);
 
     //添加科目
     public int addMenu(Menu menu);

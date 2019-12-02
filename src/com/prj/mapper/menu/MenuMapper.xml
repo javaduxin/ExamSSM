@@ -26,7 +26,22 @@
 
 
     <select id="queryMenu" resultMap="menuMap">
-        SELECT m.id,m.title,u.uname,m.ispublic,m.istop,m.opentime,u.id uid FROM `menu` m,USER u WHERE m.author=u.id ORDER BY m.istop DESC
+        SELECT
+          m.id,
+          m.title,
+          u.uname,
+          m.ispublic,
+          m.istop,
+          m.opentime,
+          u.id uid
+        FROM
+          `menu` m,
+          USER u
+        WHERE m.author = u.id
+        <if test="title!=null">
+            and title like concat('%',#{title},'%')
+        </if>
+        ORDER BY m.istop DESC
     </select>
 
 

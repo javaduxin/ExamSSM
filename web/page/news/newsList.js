@@ -6,7 +6,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
-    //新闻列表
+    //试题列表
     var tableIns = table.render({
         elem: '#newsList',
         url : '/queryMenu',
@@ -83,12 +83,12 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $(".search_btn").on("click",function(){
         if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
+            table.reload("newsList",{
                 page: {
                     curr: 1 //重新从第 1 页开始
                 },
                 where: {
-                    key: $(".searchVal").val()  //搜索的关键字
+                    title: $(".searchVal").val()  //搜索的关键字
                 }
             })
         }else{

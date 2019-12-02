@@ -93,11 +93,11 @@ public class MenuController {
     //查询科目信息
     @ResponseBody
     @RequestMapping("/queryMenu")
-    public Map<String,Object> queryMenu(){
+    public Map<String,Object> queryMenu(String title,int page,int limit){
 
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code","0");
-        map.put("data",menuServer.queryMenu());
+        map.put("data",menuServer.queryMenu(title));
 
         return map;
     }
