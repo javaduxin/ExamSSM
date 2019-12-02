@@ -21,4 +21,7 @@ public interface MenuServer {
     public List<Menu> queryMenu(String title);
     //修改置顶
     public int updateIsTop(long id,int istop);
+
+    //批量删除
+    public int delMenu(Long[] ids);
 }

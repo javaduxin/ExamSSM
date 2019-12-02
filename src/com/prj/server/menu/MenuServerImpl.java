@@ -158,4 +158,9 @@ public class MenuServerImpl implements MenuServer{
     public int updateIsTop(long id, int istop) {
         return menuMapper.updateIsTop(id, istop);
     }
+
+    @Override
+    public int delMenu(Long[] ids) {
+        return menuMapper.delMenu(ids);
+    }
 }

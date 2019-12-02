@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,6 +121,16 @@ public class MenuController {
         return "ok";
     }
 
+
+    //批量删除试题
+    @ResponseBody
+    @RequestMapping("/delMenu")
+    public String delMenu(@RequestParam() Long[] ids){
+
+        menuServer.delMenu(ids);
+
+        return "ok";
+    }
 
 
 }
