@@ -100,16 +100,16 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i class="layui-icon">&#xe609;</i> 发　布</label>
 				<div class="layui-input-block">
-					<input type="radio"   title="立即发布" lay-skin="primary" lay-filter="release" checked />
-					<input type="radio"  title="定时发布" lay-skin="primary" lay-filter="release" />
-					<!--<input type="radio"  name="release"  title="立即发布" lay-skin="primary" lay-filter="release" checked />
-					<input type="radio"  name="release"  title="定时发布" lay-skin="primary" lay-filter="release" />-->
+					<!--<input type="radio"   title="立即发布" lay-skin="primary" lay-filter="release" checked />
+					<input type="radio"  title="定时发布" lay-skin="primary" lay-filter="release" />-->
+					<input type="radio"  name="ispublic" value="1"  title="立即发布" lay-skin="primary" lay-filter="release" checked />
+					<input type="radio"  name="ispublic"  value="0" title="定时发布" lay-skin="primary" lay-filter="release" />
 				</div>
 			</div>
 			<div class="layui-form-item layui-hide releaseDate">
 				<label class="layui-form-label"></label>
 				<div class="layui-input-block">
-					<input type="text" class="layui-input" id="release" placeholder="请选择日期和时间" readonly />
+					<input type="text" class="layui-input" id="release"  placeholder="请选择日期和时间" readonly />
 				</div>
 			</div>
 			<div class="layui-form-item openness">

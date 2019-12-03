@@ -24,9 +24,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     return d.author.uname;
             }},
             {field: 'ispublic', title: '发布状态',  align:'center', templet:function(d){
-                    var str="私密浏览";
-                    if(d==1){
-                        str="公开浏览"
+                    var str="定时发布";
+                    if(d.ispublic==1){
+                        str="已发布"
                     }
 
                     return str;

@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface MenuServer {
 
+    //定时任务修改发布状态
+    public int updateTimerIsPublic(long mid);
 
     //添加科目
     public int addMenu(ClassmenuVO classmenu, File file)throws Exception;

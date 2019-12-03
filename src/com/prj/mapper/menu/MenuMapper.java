@@ -9,6 +9,8 @@ import java.util.List;
 //科目
 public interface MenuMapper {
 
+    //定时任务修改发布状态
+    public int updateTimerIsPublic(@Param("mid")long mid);
 
     //查询考试科目
     public List<Menu> queryMenu(@Param("title") String title);

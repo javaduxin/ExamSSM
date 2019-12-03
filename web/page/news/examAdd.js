@@ -111,6 +111,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         trigger : "click",
         done : function(value, date, endDate){
             submitTime = value;
+            $("#release").val(submitTime);
         }
     });
     form.on("radio(release)",function(data){
@@ -173,7 +174,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         $.ajax({
             url:"/addMenu",
             type: 'post',//提交请求的类型
-            data:JSON.stringify({"menu":datalayui.field,"classesList":ids}),//数据
+            data:JSON.stringify({"menu":datalayui.field,"classesList":ids,"mytime":$("#release").val()}),//数据
             dataType: 'json',//提交后台参数的类型
             contentType:"application/json",//定义数据格式是json
             success:function (data){

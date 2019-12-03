@@ -13,10 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class MenuController {
@@ -71,6 +69,28 @@ public class MenuController {
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu) throws Exception{
+
+        //判断试题是否是定时发布
+        if(classmenu.getMenu().getIspublic()==0){
+            //获取用户的定时时间
+            String mytime=classmenu.getMytime();
+            //把字符串转换成date对象
+            SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //时间对象
+            Date date= dateFormat.parse(mytime);
+            //启动定时任务
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    //获取试题ID
+                    long mid=classmenu.getMenu().getId();
+                    menuServer.updateTimerIsPublic(mid);
+                }
+            },date);
+        }
+
+
+
         //判断当前试题是否置顶
         if(classmenu.getMenu().getIstop()!=1){
             classmenu.getMenu().setIstop(0);
