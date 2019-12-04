@@ -12,7 +12,12 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
     //用于同步编辑器内容到textarea
     layedit.sync(editIndex);
 
-
+    //时间选择器
+    laydate.render({
+        elem: '#test4'
+        ,type: 'time',
+        format:"HH:mm"
+    });
 
 
     //文件对象
@@ -174,7 +179,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         $.ajax({
             url:"/addMenu",
             type: 'post',//提交请求的类型
-            data:JSON.stringify({"menu":datalayui.field,"classesList":ids,"mytime":$("#release").val()}),//数据
+            data:JSON.stringify({"menu":datalayui.field,"classesList":ids,"mytime":$("#release").val(),"scoreTime":$("#test4").val()}),//数据
             dataType: 'json',//提交后台参数的类型
             contentType:"application/json",//定义数据格式是json
             success:function (data){

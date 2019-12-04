@@ -14,6 +14,10 @@ layui.use(['form','layer','jquery'],function(){
  		return false;
  	})
 
+	//获取当前登录人的姓名
+	$("#myname").html(sessionStorage.getItem("uname"));
+	$("#classesName").html(sessionStorage.getItem("classesName"));
+
 
  	//加载默认数据
  	if(window.sessionStorage.getItem("systemParameter")){

@@ -9,6 +9,15 @@ public class ClassmenuVO {
     private Menu menu;//试题对象一个对象
     private List<Classes> classesList;//添加过程中有多个班级
     private String mytime;//定时发布时间
+    private String scoreTime;
+
+    public String getScoreTime() {
+        return scoreTime;
+    }
+
+    public void setScoreTime(String scoreTime) {
+        this.scoreTime = scoreTime;
+    }
 
     public String getMytime() {
         return mytime;

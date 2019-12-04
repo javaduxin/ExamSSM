@@ -12,23 +12,32 @@
         <association property="classes" resultMap="ClassMap" javaType="Classes"></association>
     </resultMap>
 
+    <!--角色map-->
+    <resultMap id="roleMap" type="Role">
+        <id column="rid" property="id"></id>
+        <result column="rname" property="rname"></result>
+    </resultMap>
+    <!--班级map-->
+    <resultMap id="ClassMap" type="Classes">
+        <id column="cid" property="id"></id>
+        <result column="classesName" property="classesName"></result>
+    </resultMap>
+
+
+
+
+
 
     <!--添加用户-->
     <insert id="addUser" parameterType="User">
         insert into user(uname,pwd) values(#{uname},#{pwd});
     </insert>
-    <!--角色map-->
-    <resultMap id="roleMap" type="Role">
-        <id column="rid" property="id"></id>
-    </resultMap>
-    <!--班级map-->
-    <resultMap id="ClassMap" type="Classes">
-        <id column="cid" property="id"></id>
-    </resultMap>
+
+
 
     <!--登录-->
     <select id="login" resultMap="userMap" parameterType="User">
-        SELECT u.*,r.id rid,c.id cid FROM `user` u,role r,classes c WHERE u.rid=r.id AND c.id=u.typeclass AND  uname=#{uname} AND pwd=#{pwd}
+        SELECT u.*,r.id rid,c.id cid,r.rname,c.classesName FROM `user` u,role r,classes c WHERE u.rid=r.id AND c.id=u.typeclass AND  uname=#{uname} AND pwd=#{pwd}
     </select>
 
 </mapper>

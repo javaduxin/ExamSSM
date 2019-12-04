@@ -69,6 +69,20 @@ public class MenuController {
     @ResponseBody
     @RequestMapping("/addMenu")
     public String addMenu(@RequestBody ClassmenuVO classmenu) throws Exception{
+        int sum=0;//考试总分钟
+        //考试时间转换成分钟
+        if(classmenu.getScoreTime()!=null){
+            String scoreTime=classmenu.getScoreTime();
+
+            //小时
+            int xiaoshi=Integer.parseInt(scoreTime.substring(0,scoreTime.indexOf(":")));
+            int fenzhong=Integer.parseInt(scoreTime.substring(scoreTime.indexOf(":")+1,scoreTime.length()));
+
+            sum=fenzhong+xiaoshi*60;
+
+        }
+
+        classmenu.getMenu().setScoreTime(sum);
 
         //判断试题是否是定时发布
         if(classmenu.getMenu().getIspublic()==0){

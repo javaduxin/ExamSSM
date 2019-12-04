@@ -59,18 +59,22 @@ public class MenuServerImpl implements MenuServer{
 
         //试题对象
         Menu menux=classmenu.getMenu();
+        //判断是否是定时发布
+        if(menux.getIspublic()==0){
+            //把字符串转换成java.sql.Timestamp
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date date = null;
+            try {
+                date = sf.parse(classmenu.getMytime());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
 
-        //把字符串转换成java.sql.Timestamp
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-             java.util.Date date = null;
-             try {
-                         date = sf.parse(classmenu.getMytime());
-                 } catch (Exception e) {
-                         e.printStackTrace();
-                 }
-        java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
+            menux.setOpentime(dateSQL);
+        }
 
-        menux.setOpentime(dateSQL);
+
 
         //添加科目
         int i=menuMapper.addMenu(menux);

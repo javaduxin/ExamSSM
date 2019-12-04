@@ -62,13 +62,14 @@
 
     <!--添加试题-->
     <insert id="addMenu"   parameterType="Menu">
-        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime) VALUES(#{id},#{title},#{author.id},#{url},#{ispublic},#{istop},
+        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime,scoreTime,sumScore) VALUES(#{id},#{title},#{author.id},#{url},#{ispublic},#{istop},
         <if test="ispublic==1">
             (SELECT NOW())
         </if>
         <if test="ispublic==0">
             #{opentime}
         </if>
+        ,#{scoreTime},#{sumScore}
         )
     </insert>
 
