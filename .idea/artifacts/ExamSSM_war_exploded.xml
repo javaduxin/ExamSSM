@@ -6,6 +6,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="ExamSSM" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="aopalliance-1.0" />
+        </element>
       </element>
       <element id="javaee-facet-resources" facet="ExamSSM/web/Web" />
     </root>
