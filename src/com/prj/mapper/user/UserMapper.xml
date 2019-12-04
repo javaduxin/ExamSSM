@@ -12,6 +12,11 @@
         <association property="classes" resultMap="ClassMap" javaType="Classes"></association>
     </resultMap>
 
+
+    <!--添加用户-->
+    <insert id="addUser" parameterType="User">
+        insert into user(uname,pwd) values(#{uname},#{pwd});
+    </insert>
     <!--角色map-->
     <resultMap id="roleMap" type="Role">
         <id column="rid" property="id"></id>

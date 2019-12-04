@@ -23,4 +23,9 @@ public class UserServerImpl  implements UserServer{
     public User login(User user) {
         return userMapper.login(user);
     }
+
+    @Override
+    public int addUser(User user) {
+        return userMapper.addUser(user);
+    }
 }

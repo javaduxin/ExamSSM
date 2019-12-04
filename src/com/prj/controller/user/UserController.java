@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.Random;
 
 @Controller
@@ -47,7 +49,8 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public String login(User user,HttpSession session,String yzm){
-
+        //提交的密码也进行md5加密
+        user.setPwd(string2MD5(user.getPwd()));
 
         User loginUser= userServer.login(user);
         //strCode自己生成的验证码，yzm用户提交的验证码
@@ -125,6 +128,39 @@ public class UserController {
         return new Color(r,g,b);
     }
 
+
+
+    //添加用户
+    @ResponseBody
+    @RequestMapping("/addUser")
+    public String addUser(User user){
+        //对密码进行md5加密
+        //添加用户初始密码是123
+        user.setPwd(string2MD5("123"));
+
+        userServer.addUser(user);
+
+        return "ok";
+    }
+
+
+    /***
+     * MD5加码 生成32位md5码
+     */
+    public static String string2MD5(String inStr){
+        try {
+            // 生成一个MD5加密计算摘要
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // 计算md5函数
+            md.update(inStr.getBytes());
+            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
+            // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
+            return new BigInteger(md.digest()).toString(16);
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
 }
 
 

@@ -7,6 +7,10 @@ import com.prj.entity.User;
 //科目
 public interface UserMapper {
 
+    //添加用户
+    public int addUser(User user);
+
+
     //登录
     public User login(User user);
 }
