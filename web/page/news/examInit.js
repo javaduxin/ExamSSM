@@ -44,6 +44,10 @@ layui.use(['form','layer','jquery'],function(){
 			if(data.value==menuData[i].id){
 				$('#scoreTime').html(menuData[i].scoreTime);
                 $('#sumScore').html(menuData[i].sumScore);
+
+                //保存科目对象
+				sessionStorage.setItem("menu",JSON.stringify(menuData[i]));
+
                 break;
 			}
 		}

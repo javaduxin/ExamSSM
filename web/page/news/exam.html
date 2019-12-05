@@ -46,8 +46,7 @@
 	</fieldset>
 	<blockquote class="layui-elem-quote" style="margin-top: 10px;font-size: 36px;">
 	  <div id="mytime">
-					总分:100
-					考试时间90分钟:
+
 			</div>
 	</blockquote>
 	<script type="text/javascript" src="../../layui/layui.js"></script>
@@ -112,7 +111,8 @@
 		
 		window.onload=function (){
 			
-
+			//显示考试信息
+			document.getElementById("mytime").innerHTML='总分:'+JSON.parse(sessionStorage.getItem("menu")).sumScore+'考试时间'+JSON.parse(sessionStorage.getItem("menu")).scoreTime+'分钟:';
 			
 			var mytimeHtml=document.getElementById("mytime").innerHTML;
 			
@@ -129,7 +129,10 @@
 				
 				document.getElementById("mytime").innerHTML=mytimeHtml+"<span>"+hour+"时"+minute+"分"+second+"秒</span>";
 				
-				if(minute==90){
+				if(minute==JSON.parse(sessionStorage.getItem("menu")).scoreTime){
+
+
+
 					document.getElementById("scoreform").submit();
 				}
 			},1000);
@@ -147,9 +150,8 @@
             var getTpl = document.getElementById("demo").innerHTML;//获取模板对象中的html
 
             $.ajax({
-                url:"/queryExam/1574651950543",
+                url:"/queryExam/"+JSON.parse(sessionStorage.getItem("menu")).id,
                 success:function (jsondata) {
-
 
                     var infos=[];
 
@@ -162,8 +164,6 @@
                         "list":jsondata
                         ,"infos":infos
                     }
-
-
 
                     //总题数
                     sumPage=jsondata.length;
@@ -192,6 +192,11 @@
 				layer.confirm('确定交卷？', {
 					btn: ['确定', '取消'] //可以无限个按钮
 				}, function(index, layero){
+
+				    // 提交试卷
+					
+
+
 					parent.location.reload();
 				}, function(index){
 
