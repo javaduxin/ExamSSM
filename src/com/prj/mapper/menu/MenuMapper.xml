@@ -22,6 +22,11 @@
     </resultMap>
 
 
+    <!--交卷-->
+    <insert id="insertResult" parameterType="Result">
+        INSERT INTO(uid,result,TIME,MID,info) VALUES(#{user.id},#{result},#{time},#{menu.id},#{info})
+    </insert>
+
     <!--加载登录人考试列表-->
     <select id="loadMenu" resultMap="menuMap">
 

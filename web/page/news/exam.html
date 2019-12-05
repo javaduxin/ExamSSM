@@ -13,12 +13,12 @@
 	<link rel="stylesheet" href="../../css/public.css" media="all" />
 </head>
 <body class="childrenBody">
-	<form class="layui-form">
+
 		<!--第二步：建立视图。用于呈现渲染结果。-->
 		<div id="view">
 
 		</div>
-
+	<form class="layui-form">
 
 		<div class="magt10 layui-center">
 			<div class="layui-btn-container">
@@ -193,9 +193,48 @@
 					btn: ['确定', '取消'] //可以无限个按钮
 				}, function(index, layero){
 
+				    //考试ID
+                    datalayui.field.menu={id:JSON.parse(sessionStorage.getItem("menu")).id};
+                    //用户id
+                    datalayui.field.user={id:sessionStorage.getItem("uid")};
+
+                    //学生选择答案数组
+                    var choosex=[];
+
+					//循环学生选择的答案
+					for(var i=0;i<sumPage;i++){
+
+					    //每道题的5个单选按钮
+                        var radios=document.getElementsByName("choose"+i);
+
+                        for(var j=0;j<radios.length;j++){
+                            if(radios[j].checked){
+                                choosex.push(radios[j].value);
+                                break;
+							}
+							//循环最后判断如果用户一次没选
+							if(j==radios.length-1){
+                                choosex.push("-1");
+							}
+						}
+					}
+
 				    // 提交试卷
-					
-					parent.location.reload();
+					$.ajax({
+						url:"/submitExam",
+                        type: 'post',//提交请求的类型
+                        data:JSON.stringify({"result":datalayui.field,"choosex":choosex}),//数据
+                        dataType: 'json',//提交后台参数的类型
+                        contentType:"application/json",//定义数据格式是json
+						success:function (data){
+						    if("ok"==data){
+                                parent.location.reload();
+							}else{
+						        layer.msg("交卷失败请联系管理员");
+							}
+						}
+					})
+
 				}, function(index){
 
 				});
