@@ -6,7 +6,7 @@ layui.use(['form','layer','jquery'],function(){
 
  	var systemParameter;
  	form.on("submit",function(data){
- 		if(data.field.modules==-1){
+ 		if(data.field.mids==-1){
  			layer.msg("请选择考试");
 			return false;
 		}
@@ -18,10 +18,14 @@ layui.use(['form','layer','jquery'],function(){
 	$("#myname").html(sessionStorage.getItem("uname"));
 	$("#classesName").html(sessionStorage.getItem("classesName"));
 
+	//考试信息
+	var menuData=[];
+
 	//加载考试列表
 	$.ajax({
 		url:"/loadExam/"+sessionStorage.getItem("uid"),
 		success:function (data) {
+            menuData=data;
 			var html='<option value="-1">请选择</option>';
 			for(var i=0;i<data.length;i++){
                 html+='<option value="'+data[i].id+'">'+data[i].title+'</option>';
@@ -33,9 +37,21 @@ layui.use(['form','layer','jquery'],function(){
             form.render();
         }
 	})
+	//用户选择下拉列表，更改信息
+    form.on('select', function(data){
+
+		for(var i=0;i<menuData.length;i++){
+			if(data.value==menuData[i].id){
+				$('#scoreTime').html(menuData[i].scoreTime);
+                $('#sumScore').html(menuData[i].sumScore);
+                break;
+			}
+		}
+    });
 
 
- 	//加载默认数据
+
+    //加载默认数据
  	if(window.sessionStorage.getItem("systemParameter")){
  		var data = JSON.parse(window.sessionStorage.getItem("systemParameter"));
  		fillData(data);

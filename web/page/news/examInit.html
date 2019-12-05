@@ -37,22 +37,18 @@
 		    		<td pc>
 						<label class="layui-form-label">请选择考试</label>
 						<div class="layui-input-inline">
-							<select id="mids" name="modules" lay-verify="required" lay-search="">
-								<option value="-1">请选择</option>
-								<option value="1">java基础</option>
-								<option value="2">循环</option>
-								<option value="3">面向对象</option>
+							<select id="mids" name="mids" lay-verify="required" lay-search="">
 							</select>
 						</div>
 					</td>
 		    	</tr>
 		    	<tr>
 		    		<td>考试时间</td>
-		    		<td pc>90分钟</td>
+		    		<td id="scoreTime" pc></td>
 		    	</tr>
 		    	<tr>
 		    		<td>总分</td>
-		    		<td pc>100</td>
+		    		<td id="sumScore" pc></td>
 		    	</tr>
 		    	<tr>
 		    		<td>班级</td>
