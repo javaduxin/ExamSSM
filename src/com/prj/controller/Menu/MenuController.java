@@ -167,4 +167,16 @@ public class MenuController {
     }
 
 
+    //加载登录人的考试列表
+    @ResponseBody
+    @RequestMapping("/loadExam/{id}")
+    public List<Menu> loadExam(@PathVariable int id){
+
+        List<Menu> menuList= menuServer.loadMenu(id);
+
+        return menuList;
+    }
+
+
+
 }

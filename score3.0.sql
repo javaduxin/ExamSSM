@@ -394,7 +394,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uname` varchar(22) DEFAULT NULL,
-  `pwd` varchar(22) DEFAULT NULL,
+  `pwd` varchar(50) DEFAULT NULL,
   `typeclass` int(22) DEFAULT NULL,
   `url` varchar(222) DEFAULT NULL COMMENT '头像',
   `rid` int(11) DEFAULT NULL,

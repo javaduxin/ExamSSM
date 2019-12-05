@@ -42,6 +42,11 @@ public class MenuServerImpl implements MenuServer{
         this.menuMapper = menuMapper;
     }
 
+    @Override
+    public List<Menu> loadMenu(int id) {
+        return menuMapper.loadMenu(id);
+    }
+
     //定时任务修改发布状态
     @Override
     public int updateTimerIsPublic(long mid) {

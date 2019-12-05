@@ -11,6 +11,8 @@
         <result column="ispublic" property="ispublic"></result>
         <result column="istop" property="istop"></result>
         <result column="opentime" property="opentime"></result>
+        <result column="scoreTime" property="scoreTime"></result>
+        <result column="sumScore" property="sumScore"></result>
         <association property="author" resultMap="userMap" javaType="Integer"></association>
     </resultMap>
 
@@ -18,6 +20,19 @@
         <id column="uid" property="id"></id>
         <result column="uname" property="uname"></result>
     </resultMap>
+
+
+    <!--加载登录人考试列表-->
+    <select id="loadMenu" resultMap="menuMap">
+
+        SELECT m.* FROM USER u,classes c,classmenu cm,menu m
+         WHERE u.typeclass=c.id
+         AND c.id=cm.classid
+         AND m.id=cm.menuid
+         AND m.ispublic=1
+         AND u.id=#{id}
+
+    </select>
 
     <!--批量删除-->
     <delete id="delMenu">

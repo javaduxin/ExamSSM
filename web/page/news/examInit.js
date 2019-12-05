@@ -18,6 +18,22 @@ layui.use(['form','layer','jquery'],function(){
 	$("#myname").html(sessionStorage.getItem("uname"));
 	$("#classesName").html(sessionStorage.getItem("classesName"));
 
+	//加载考试列表
+	$.ajax({
+		url:"/loadExam/"+sessionStorage.getItem("uid"),
+		success:function (data) {
+			var html='<option value="-1">请选择</option>';
+			for(var i=0;i<data.length;i++){
+                html+='<option value="'+data[i].id+'">'+data[i].title+'</option>';
+			}
+
+			$("#mids").html(html);
+
+			//重新加载表单
+            form.render();
+        }
+	})
+
 
  	//加载默认数据
  	if(window.sessionStorage.getItem("systemParameter")){

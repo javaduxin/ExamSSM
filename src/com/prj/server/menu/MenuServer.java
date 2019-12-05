@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface MenuServer {
 
+    //加载登录人考试列表
+    public List<Menu> loadMenu(int id);
+
     //定时任务修改发布状态
     public int updateTimerIsPublic(long mid);
 
