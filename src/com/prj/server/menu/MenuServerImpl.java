@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service("MenuServerImpl")
@@ -40,6 +41,56 @@ public class MenuServerImpl implements MenuServer{
 
     public void setMenuMapper(MenuMapper menuMapper) {
         this.menuMapper = menuMapper;
+    }
+
+    @Override
+    public int insertResult(ResultVO resultvo) {
+
+        //获取学生选择的答案
+        String daAn="";
+        //学生提交的答案
+        List<String> choosex=resultvo.getChoosex();
+
+        for(String str:choosex){
+            daAn+=str;
+        }
+
+        //获取结果对象
+        Result result=resultvo.getResult();
+        //把整个结果存入答案列
+        result.setInfo(daAn);
+
+        //获取当前考试时间
+        Date date=new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //把时间转换成字符串
+        result.setTime(dateFormat.format(date));
+
+        //查询此次考试正确答案
+        List<Exam> examList= menuMapper.queryExamAnswer(result.getMenu().getId());
+
+        //总分数
+        int sumScore=0;
+
+        //判卷
+        for(int i=0;i<choosex.size();i++){
+            //获取当前正确答案
+            String answer= examList.get(i).getAnswer();
+
+            if("A".equals(answer)&&choosex.get(i).equals("1")){
+                sumScore+=10;
+            }else if("B".equals(answer)&&choosex.get(i).equals("2")){
+                sumScore+=10;
+            }else if("C".equals(answer)&&choosex.get(i).equals("3")){
+                sumScore+=10;
+            }else if("D".equals(answer)&&choosex.get(i).equals("4")){
+                sumScore+=10;
+            }
+
+        }
+        //最后得分
+        result.setResult(sumScore);
+        return menuMapper.insertResult(result);
     }
 
     @Override

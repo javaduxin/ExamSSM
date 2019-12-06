@@ -22,9 +22,14 @@
     </resultMap>
 
 
+    <!--查询正确答案-->
+    <select id="queryExamAnswer" resultType="Exam">
+        SELECT * FROM `exam` WHERE MID=#{mid}
+    </select>
+
     <!--交卷-->
     <insert id="insertResult" parameterType="Result">
-        INSERT INTO(uid,result,TIME,MID,info) VALUES(#{user.id},#{result},#{time},#{menu.id},#{info})
+        INSERT INTO result(uid,result,TIME,MID,info) VALUES(#{user.id},#{result},#{time},#{menu.id},#{info})
     </insert>
 
     <!--加载登录人考试列表-->
@@ -35,6 +40,7 @@
          AND c.id=cm.classid
          AND m.id=cm.menuid
          AND m.ispublic=1
+         AND m.id NOT IN (SELECT r.mid FROM result r WHERE r.mid=m.id)
          AND u.id=#{id}
 
     </select>

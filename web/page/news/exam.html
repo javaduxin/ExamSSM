@@ -227,13 +227,10 @@
                         dataType: 'json',//提交后台参数的类型
                         contentType:"application/json",//定义数据格式是json
 						success:function (data){
-						    if("ok"==data){
-                                parent.location.reload();
-							}else{
-						        layer.msg("交卷失败请联系管理员");
-							}
+
 						}
 					})
+                    parent.location.reload();
 
 				}, function(index){
 

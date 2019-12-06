@@ -184,7 +184,7 @@ public class MenuController {
     @RequestMapping("/submitExam")
     public String submitExam(@RequestBody ResultVO resultVO){
 
-        System.out.println(resultVO);
+        menuServer.insertResult(resultVO);
 
 
         return "ok";

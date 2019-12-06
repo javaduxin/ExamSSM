@@ -278,7 +278,7 @@ CREATE TABLE `result` (
   `title` varchar(100) DEFAULT NULL,
   `result` int(11) DEFAULT NULL,
   `time` varchar(22) DEFAULT NULL,
-  `mid` int(11) DEFAULT NULL,
+  `mid` bigint(50) DEFAULT NULL,
   `info` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8;

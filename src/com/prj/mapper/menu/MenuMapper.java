@@ -1,6 +1,7 @@
 package com.prj.mapper.menu;
 
 import com.prj.entity.Classmenu;
+import com.prj.entity.Exam;
 import com.prj.entity.Menu;
 import com.prj.entity.Result;
 import org.apache.ibatis.annotations.Param;
@@ -9,6 +10,10 @@ import java.util.List;
 
 //科目
 public interface MenuMapper {
+
+    //查询考试答案
+    public List<Exam> queryExamAnswer(@Param("mid")long mid);
+
 
     //交卷
     public int insertResult(Result result);

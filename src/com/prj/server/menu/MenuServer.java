@@ -1,14 +1,15 @@
 package com.prj.server.menu;
 
-import com.prj.entity.Classmenu;
-import com.prj.entity.ClassmenuVO;
-import com.prj.entity.Menu;
+import com.prj.entity.*;
 
 import java.io.File;
 import java.util.List;
 
 
 public interface MenuServer {
+
+    //交卷
+    public int insertResult(ResultVO resultVO);
 
     //加载登录人考试列表
     public List<Menu> loadMenu(int id);
