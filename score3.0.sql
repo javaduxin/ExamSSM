@@ -24,11 +24,12 @@ CREATE TABLE `classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `classesName` varchar(22) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `classes` */
 
 insert  into `classes`(`id`,`classesName`) values
+(0,'无'),
 (1,'软件1805'),
 (2,'软件1804'),
 (3,'动漫1801'),
@@ -46,29 +47,11 @@ CREATE TABLE `classmenu` (
 /*Data for the table `classmenu` */
 
 insert  into `classmenu`(`classid`,`menuid`) values
-(1,1),
 (1,2),
 (1,3),
 (2,3),
-(2,1574645357324),
-(3,1574645357324),
-(3,1574645420768),
-(4,1574645420768),
-(1,1574645553236),
-(2,1574645553236),
-(1,1574645781910),
-(1,1574646583945),
-(2,1574646583945),
-(1,1574646670150),
-(1,1574648251014),
-(1,1574648353837),
-(1,1574648452843),
-(1,1574648577223),
-(1,1574648838744),
-(1,1574649073845),
-(1,1574651005565),
-(1,1574651247352),
-(1,1574651950543);
+(2,1575855609792),
+(1,1575856311650);
 
 /*Table structure for table `exam` */
 
@@ -82,27 +65,11 @@ CREATE TABLE `exam` (
   `mid` bigint(22) DEFAULT NULL,
   `imgUrl` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 /*Data for the table `exam` */
 
 insert  into `exam`(`id`,`title`,`info`,`answer`,`mid`,`imgUrl`) values
-(1,'Java源文件和编译后的文件扩展名分别是___ ___','A.class 和 .java~B.class 和 .class~C.java 和 .class~D.java 和 .java','3',2,NULL),
-(2,'判断两个字符串s1,s2是否同一个字符串，需要使用___ ____。','A`if`(s1=s2)~B`if`(s1==s2)~C`if`(`equals`(s1,s2))~D`if`(s1.equals(s2))','2',2,NULL),
-(3,'下列说法正确的是','A JAVA程序的main方法必须写在类里面~B JAVA程序中可以有多个main方法~C JAVA程序中类名必须与文件名一样~ D JAVA程序的main方法中如果只有一条语句，可以不用{}(大括号)括起来','1',2,NULL),
-(4,'下列哪些不属于java注释','A`//`~B/**/~C/***/~D@','4',2,NULL),
-(5,'变量命名规范说法正确的是','A 变量由字母、下划线、数字、$符号随意组成；~ B 变量不能以数字作为开头；~ C A和a在java中是同一个变量；~  D 不同类型的变量，可以起相同的名字','2',2,NULL),
-(6,'下列javaDoc注释正确的是','A /*我爱北京天安门*/~ B //我爱北京天安门*/~ C /**我爱北京天安门*/~ D /*我爱北京天安门**/','3',2,NULL),
-(7,'为一个boolean类型变量赋值时，可以使用','A boolean = 1;~B boolean a = (9 >= 10);~ C boolean a=\"真\";~ D boolean a = = false;','2',2,NULL),
-(8,'表达式(11+3*8)/4%3的值是','A 31~ B 0~ C 1~ D 2','4',2,NULL),
-(9,'下列值不为true的表达式有','A \"john\" = = \"john\"~ B \"john\".equals(\"john\")~ C \"john\" = \"john\" ~ D、 \"john\".equals(new String(\"john\"))','3',2,NULL),
-(10,'在java中下列关于自动类型转换说法正确的是','A 基本数据类型和String相加结果一定是字符串型~ B char类型和int类型相加结果一定是字符~ C double类型可以自动转换为int~  D char + int + double +\"\" 结果一定是double','1',2,NULL),
-(11,'声明公用的abstract方法的正确格式是','A、public abstract void add() {}~B、public abstract add();~C、public abstract void add();~D、public virtual add();','3',3,NULL),
-(13,'方法methodA定义如下: \n则返回值returnType为','A、byte~B、double~C、short~D、int','2',3,'13.png'),
-(14,'在switch（表达式）语句中，表达式的类型不能为','A、byte~B、char~C、long~D、int','3',3,NULL),
-(15,'下列程序结果正确的是','A、11,12~B、11,13~C、11,11~D、12,12','2',3,'15.png'),
-(16,'下列不属于面向对象的特征','A、封装~B、多态~C、继承~D、接口','4',3,NULL),
-(17,'接口与抽象类说法错误的是','A、都不可以被实例化~B、接口不能有普通方法~C、接口的变量是静态的~D、抽象类可以有普通方法','3',3,NULL),
 (18,'关于继承与接口实现如下选项不正确的是','A  public class a extends Eat{…}~B  public class a implements Eat{…}~C  public class a extends Eat,drink{…}~D  public class a implements Eat,drink{…}','3',3,NULL),
 (19,'有一个类A，以下为其构造方法的声明，其中正确的是','A)public A(int x){...}~B)static A(int x){...}~C)public a(int x){...}~D)void A(int x){...}','1',3,NULL),
 (20,'以下关于Java语言继承的说法正确的是','A)Java中的类可以有多个直接父类~B)抽象类不能有子类~C)Java中的接口支持多继承~D)最终类可以作为其它类的父类','3',3,NULL),
@@ -117,9 +84,12 @@ insert  into `exam`(`id`,`title`,`info`,`answer`,`mid`,`imgUrl`) values
 (29,'mybatis关于parameterType说法错误的是','A:当把一个List实例或者数组作为参数对象传给MyBatis的时候，MyBatis会自动将它包装在一个Map中，List实例将会以“list”作为键，而数组实例将会以“array”作为键。那么在配置文件中的parameterType是可以不配置~B:MyBatis的传入参数如果是一个List或数组，可以使用mapper配置文件中的foreach语句~C:MyBatis的传入参数可以是各种Java的基本数据类型，基本数据类型作为参数，可以传多个。通过#{参数名} 即可获取传入的值~D:MyBatis的传入参数也可是复杂数据类型：包含Java实体类、Map。通过#{属性名}或#{Map的key}即可获取传入的值','3',5,NULL),
 (30,'resultType当返回一个集合时，应该设置为','A:集合类型~B:字符串类型~C:整型~D:集合中所包含元素的类型','4',5,NULL),
 (31,'mybatis与hibernate区别描述错误的是','A:MyBatis可以进行更加细致的SQL优化，可以减少查询字段~B:MyBatis入门相对简单并且延续了SQL的使用经验~C:HiBernate功能强大，数据无关性更有优势，程序员可以更专心进行业务处理~D:Hibernate支持二级缓存而MyBatis不支持','4',5,NULL),
-(45,'spring中的哪个标签是实体类标签','A:&lt;xxx&gt;~B:&lt;haha&gt;~C:&lt;bean&gt;~D:&lt;property&gt;','C',1574651950543,NULL),
-(46,'Mybatis中的sqlsession干啥的','A:打酱油~B:创建实体类~C:创建工厂对象~D:执行sql','D',1574651950543,NULL),
-(47,'java中的哪些是基本数据类型','A:int~B:String~C:集合~D:数组','A',1574651950543,NULL);
+(54,'spring中的哪个标签是实体类标签','A:&lt;xxx&gt;~B:&lt;haha&gt;~C:&lt;bean&gt;~D:&lt;property&gt;','C',1575855609792,NULL),
+(55,'Mybatis中的sqlsession干啥的','A:打酱油~B:创建实体类~C:创建工厂对象~D:执行sql','D',1575855609792,NULL),
+(56,'java中的哪些是基本数据类型','A:int~B:String~C:集合~D:数组','A',1575855609792,NULL),
+(57,'spring中的哪个标签是实体类标签','A:&lt;xxx&gt;~B:&lt;haha&gt;~C:&lt;bean&gt;~D:&lt;property&gt;','C',1575856311650,NULL),
+(58,'Mybatis中的sqlsession干啥的','A:打酱油~B:创建实体类~C:创建工厂对象~D:执行sql','D',1575856311650,NULL),
+(59,'java中的哪些是基本数据类型','A:int~B:String~C:集合~D:数组','A',1575856311650,NULL);
 
 /*Table structure for table `history` */
 
@@ -236,37 +206,24 @@ CREATE TABLE `menu` (
   `url` varchar(500) DEFAULT NULL COMMENT '试题路径',
   `type` varchar(200) DEFAULT NULL COMMENT '试题类型',
   `opentime` datetime DEFAULT NULL COMMENT '发布时间',
-  `ispublic` int(11) DEFAULT NULL COMMENT '是否公布',
+  `ispublic` int(11) DEFAULT NULL COMMENT '是否公布,1是立即0定时',
   `istop` int(11) DEFAULT NULL COMMENT '是否置顶',
   `scoreTime` int(11) DEFAULT NULL COMMENT '考试时间分钟',
   `sumScore` int(11) DEFAULT NULL COMMENT '总分',
+  `isprivate` int(11) DEFAULT NULL COMMENT '是否是私密考题 0是私密1公开',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1574651950544 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1575856311651 DEFAULT CHARSET=utf8;
 
 /*Data for the table `menu` */
 
-insert  into `menu`(`id`,`title`,`author`,`status`,`url`,`type`,`opentime`,`ispublic`,`istop`,`scoreTime`,`sumScore`) values
-(1,'java基础',NULL,NULL,NULL,NULL,NULL,NULL,NULL,40,100),
-(2,'循环',NULL,NULL,NULL,NULL,NULL,NULL,NULL,60,100),
-(3,'面向对象',NULL,NULL,NULL,NULL,NULL,NULL,NULL,90,100),
-(4,'SSM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(5,'SSM整合',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(6,'茶文化考试',3,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL),
-(1574645357324,'java第二学期考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574645420768,'mysql考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574645553236,'python考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574645781910,'面向接口',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574646583945,'xxx',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574646670150,'xxx',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574648251014,'今天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574648353837,'今天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574648452843,'今天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574648577223,'今天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574648838744,'明天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574649073845,'明天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574651005565,'后天考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574651247352,'1805期末测试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-(1574651950543,'1805在线考试',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `menu`(`id`,`title`,`author`,`status`,`url`,`type`,`opentime`,`ispublic`,`istop`,`scoreTime`,`sumScore`,`isprivate`) values
+(1,'java基础',NULL,NULL,NULL,NULL,NULL,NULL,NULL,40,100,NULL),
+(2,'循环',NULL,NULL,NULL,NULL,NULL,NULL,NULL,60,100,NULL),
+(3,'面向对象',NULL,NULL,NULL,NULL,NULL,NULL,NULL,90,100,NULL),
+(4,'SSM',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(5,'SSM整合',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+(1575855609792,'测试1',110,NULL,NULL,NULL,'2019-12-09 09:40:09',1,0,60,150,1),
+(1575856311650,'测试2',110,NULL,NULL,NULL,'2019-12-09 09:51:51',1,1,60,150,0);
 
 /*Table structure for table `result` */
 
@@ -399,7 +356,7 @@ CREATE TABLE `user` (
   `url` varchar(222) DEFAULT NULL COMMENT '头像',
   `rid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
@@ -409,7 +366,7 @@ insert  into `user`(`id`,`uname`,`pwd`,`typeclass`,`url`,`rid`) values
 (5,'李昊宸','123',0,NULL,NULL),
 (6,'余先宝','123',0,NULL,NULL),
 (7,'高瑞春','123',0,NULL,NULL),
-(8,'田腾','123',3,NULL,2),
+(8,'田腾','202cb962ac59075b964b07152d234b70',3,NULL,2),
 (9,'周冉','123',0,NULL,NULL),
 (10,'路亚伟','123',0,NULL,NULL),
 (11,'李瑞峰','123',0,NULL,NULL),
@@ -504,7 +461,10 @@ insert  into `user`(`id`,`uname`,`pwd`,`typeclass`,`url`,`rid`) values
 (103,'刘凯特','123',0,NULL,NULL),
 (104,'李俊鹤','123',0,NULL,NULL),
 (105,'范敏杰','123',0,NULL,NULL),
-(106,'姜宏','123',0,NULL,NULL);
+(106,'姜宏','123',0,NULL,NULL),
+(108,'admin','202cb962ac59075b964b07152d234b70',0,NULL,1),
+(109,'张老师','202cb962ac59075b964b07152d234b70',0,NULL,3),
+(110,'王老师','202cb962ac59075b964b07152d234b70',0,NULL,3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
