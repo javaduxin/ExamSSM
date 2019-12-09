@@ -1,9 +1,6 @@
 package com.prj.controller.Menu;
 
-import com.prj.entity.ClassmenuVO;
-import com.prj.entity.Menu;
-import com.prj.entity.Result;
-import com.prj.entity.ResultVO;
+import com.prj.entity.*;
 import com.prj.server.menu.MenuServer;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -130,11 +128,13 @@ public class MenuController {
     //查询科目信息
     @ResponseBody
     @RequestMapping("/queryMenu")
-    public Map<String,Object> queryMenu(String title,int page,int limit){
+    public Map<String,Object> queryMenu(String title, int page, int limit, HttpSession session){
 
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("code","0");
-        map.put("data",menuServer.queryMenu(title));
+        //当前登录人
+        User user=(User)session.getAttribute("loginUser");
+        map.put("data",menuServer.queryMenu(title,user));
 
         return map;
     }

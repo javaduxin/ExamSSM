@@ -102,7 +102,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label"><i class="layui-icon">&#xe60e;</i> 总时间</label>
 				<div class="layui-input-block newsStatus">
-					<input type="text" class="layui-input" id="test4"  placeholder="HH:mm">
+					<input type="text" class="layui-input" id="test4" lay-verify="mytime" placeholder="HH:mm">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -123,8 +123,8 @@
 			<div class="layui-form-item openness">
 				<label class="layui-form-label"><i class="seraph icon-look"></i> 公开度</label>
 				<div class="layui-input-block">
-					<input type="radio" name="ispublic" value="1" title="开放浏览" lay-skin="primary" checked />
-					<input type="radio" name="ispublic" value="0" title="私密浏览" lay-skin="primary" />
+					<input type="radio" name="isprivate" value="0" title="开放浏览" lay-skin="primary" checked />
+					<input type="radio" name="isprivate" value="1" title="私密浏览" lay-skin="primary" />
 				</div>
 			</div>
 			<div class="layui-form-item newsTop">

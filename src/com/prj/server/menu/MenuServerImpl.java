@@ -233,8 +233,9 @@ public class MenuServerImpl implements MenuServer{
     }
 
     @Override
-    public List<Menu> queryMenu(String title) {
-        return menuMapper.queryMenu(title);
+    public List<Menu> queryMenu(String title,User user) {
+
+        return menuMapper.queryMenu(title,user);
     }
 
     @Override

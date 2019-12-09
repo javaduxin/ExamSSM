@@ -19,6 +19,15 @@ public class Menu {
   private int istop;
   private int scoreTime;
   private int sumScore;
+  private int isprivate;//老师的私有考题
+
+  public int getIsprivate() {
+    return isprivate;
+  }
+
+  public void setIsprivate(int isprivate) {
+    this.isprivate = isprivate;
+  }
 
   public User getAuthor() {
     return author;

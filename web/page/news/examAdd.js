@@ -129,7 +129,7 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
             submitTime = time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate()+' '+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds();
         }
     });
-
+    //表单验证
     form.verify({
         newsName : function(val){
             if(val == ''){
@@ -149,6 +149,11 @@ layui.use(['form','layer','layedit','laydate','upload','transfer','jquery','elem
         transferId : function(val){
             if(transfer.getData('classid').length<=0){
                 return "考试班级不能为空";
+            }
+        },
+        mytime:function (val){
+            if($("#test4").val()==""){
+                return "请选择考试总时长";
             }
         }
     })

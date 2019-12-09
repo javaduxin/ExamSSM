@@ -31,9 +31,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
 
                     return str;
                 }},
-            {field: 'newsLook', title: '浏览权限', align:'center', templet:function(d){
+            {field: 'isprivate', title: '浏览权限', align:'center', templet:function(d){
                     var str="私密浏览";
-                    if(d.ispublic==1){
+                    if(d.isprivate==0){
                         str="公开浏览"
                     }
 

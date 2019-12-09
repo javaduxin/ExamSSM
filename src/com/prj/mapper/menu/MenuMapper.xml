@@ -13,6 +13,7 @@
         <result column="opentime" property="opentime"></result>
         <result column="scoreTime" property="scoreTime"></result>
         <result column="sumScore" property="sumScore"></result>
+        <result column="isprivate" property="isprivate"></result>
         <association property="author" resultMap="userMap" javaType="Integer"></association>
     </resultMap>
 
@@ -62,21 +63,42 @@
     <!--查询试题-->
     <select id="queryMenu" resultMap="menuMap">
         SELECT
-          m.id,
-          m.title,
-          u.uname,
-          m.ispublic,
-          m.istop,
-          m.opentime,
-          u.id uid
+        m.id,
+        m.title,
+        u.uname,
+        m.ispublic,
+        m.istop,
+        m.opentime,
+        u.id uid,
+        m.isprivate
         FROM
-          `menu` m,
-          USER u
+        `menu` m,
+        USER u
         WHERE m.author = u.id
+        AND u.id=#{user.id}
+        AND m.isprivate=1
         <if test="title!=null">
             and title like concat('%',#{title},'%')
         </if>
-        ORDER BY m.istop DESC
+        UNION
+        SELECT
+        m.id,
+        m.title,
+        u.uname,
+        m.ispublic,
+        m.istop,
+        m.opentime,
+        u.id uid,
+        m.isprivate
+        FROM
+        `menu` m,
+        USER u
+        WHERE m.author = u.id
+        AND m.isprivate=0
+        <if test="title!=null">
+            and title like concat('%',#{title},'%')
+        </if>
+        ORDER BY istop DESC
     </select>
 
 
@@ -88,14 +110,14 @@
 
     <!--添加试题-->
     <insert id="addMenu"   parameterType="Menu">
-        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime,scoreTime,sumScore) VALUES(#{id},#{title},#{author.id},#{url},#{ispublic},#{istop},
+        INSERT INTO menu(id,title,author,url,ispublic,istop,opentime,scoreTime,sumScore,isprivate) VALUES(#{id},#{title},#{author.id},#{url},#{ispublic},#{istop},
         <if test="ispublic==1">
             (SELECT NOW())
         </if>
         <if test="ispublic==0">
             #{opentime}
         </if>
-        ,#{scoreTime},#{sumScore}
+        ,#{scoreTime},#{sumScore},#{isprivate}
         )
     </insert>
 

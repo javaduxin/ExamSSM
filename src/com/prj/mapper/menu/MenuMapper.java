@@ -1,9 +1,6 @@
 package com.prj.mapper.menu;
 
-import com.prj.entity.Classmenu;
-import com.prj.entity.Exam;
-import com.prj.entity.Menu;
-import com.prj.entity.Result;
+import com.prj.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,7 +24,7 @@ public interface MenuMapper {
     public int updateTimerIsPublic(@Param("mid")long mid);
 
     //查询考试科目
-    public List<Menu> queryMenu(@Param("title") String title);
+    public List<Menu> queryMenu(@Param("title") String title,@Param("user") User user);
 
     //添加科目
     public int addMenu(Menu menu);

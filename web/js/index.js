@@ -29,7 +29,10 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 				if(sessionStorage.getItem("userRid")==2){
                     contentManagement.push(data.contentManagement[2]);
 				}
-
+				//老师
+                if(sessionStorage.getItem("userRid")==3){
+                    contentManagement=data.contentManagement;
+                }
 
 				//加载考试管理中的左侧菜单
 
@@ -45,6 +48,10 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
                 }
                 //学生
                 if(sessionStorage.getItem("userRid")==2){
+
+                }
+                //老师
+                if(sessionStorage.getItem("userRid")==3){
 
                 }
 				dataStr = contentManagement;
