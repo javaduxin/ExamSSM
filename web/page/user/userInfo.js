@@ -12,15 +12,23 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
         laydate = layui.laydate,
         address = layui.address;
 
+    //加载用户信息
+    $("#uname").val(sessionStorage.getItem("uname"));
+    $("#userFace").attr("src",sessionStorage.getItem("userUrl"));//加载用户头像
+
     //上传头像
     upload.render({
         elem: '.userFaceBtn',
-        url: '../../json/userface.json',
+        url: '/userUpload',
+        field:"myfile",
         method : "get",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
         done: function(res, index, upload){
-            var num = parseInt(4*Math.random());  //生成0-4的随机数，随机显示一个头像信息
-            $('#userFace').attr('src',res.data[num].src);
-            window.sessionStorage.setItem('userFace',res.data[num].src);
+            layer.msg("替换头像成功,请重新登录");
+        },before: function(obj){
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result){
+                $('#userFace').attr('src', result); //图片链接（base64）
+            });
         }
     });
 

@@ -5,7 +5,16 @@ public class User {
     private String uname;
     private String pwd;
     private Role role;
+    private String url;
     private Classes classes;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getId() {
         return id;

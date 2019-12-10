@@ -20,7 +20,7 @@
     <mvc:resources mapping="/json/**" location="/json/" />
     <mvc:resources mapping="/layui/**" location="/layui/" />
     <mvc:resources mapping="/page/**" location="/page/" />
-
+    <mvc:resources mapping="/upload/**" location="/upload/" />
     <!--配置文件上传-->
     <!--id必须叫multipartResolver-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

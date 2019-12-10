@@ -5,17 +5,22 @@ import com.prj.entity.Role;
 import com.prj.entity.User;
 import com.prj.server.user.UserServer;
 import com.sun.deploy.net.HttpResponse;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -184,11 +189,34 @@ public class UserController {
         }else {
             map.put("msg","旧密码错误，请重新输入！");
         }
-
         return map;
-
     }
+    //头像上传
+    @ResponseBody
+    @RequestMapping("/userUpload")
+    public Map<String,Object> upload(@RequestParam("myfile") MultipartFile myfile, HttpServletRequest request,HttpSession session) throws Exception {
 
+        //判断用户是否选择文件
+        //isEmpty()判断文件是否为空
+        if(!myfile.isEmpty()){
+
+            //获取上传的服务器地址
+            String url=request.getSession().getServletContext().getRealPath("/upload/");
+            //创建文件对象getOriginalFilename()获取文件名称
+            File file=new File(url+myfile.getOriginalFilename());
+            //把文件复制到目标地址FileUtils.copyInputStreamToFile(文件对象，目标地址对象)
+            FileUtils.copyInputStreamToFile(myfile.getInputStream(),file);
+
+            User user=(User)session.getAttribute("loginUser");
+            userServer.userUpload("/upload/"+myfile.getOriginalFilename(),user.getId());
+
+        }
+        Map<String,Object> map = new HashMap<String,Object>();
+        //返回json
+        map.put("msg","ok");
+        map.put("code",200);
+        return map;
+    }
 
 }
 

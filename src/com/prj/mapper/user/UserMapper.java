@@ -16,4 +16,8 @@ public interface UserMapper {
 
     //登录
     public User login(User user);
+
+    //上传头像
+    public int userUpload(@Param("url") String url,@Param("uid") int uid);
+
 }

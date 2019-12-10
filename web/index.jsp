@@ -54,7 +54,7 @@
                     <a href="javascript:;"><i class="seraph icon-lock"></i><cite>锁屏</cite></a>
                 </li>
                 <li class="layui-nav-item" id="userInfo">
-                    <a href="javascript:;"><img src="images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">${loginUser.uname}</cite></a>
+                    <a href="javascript:;"><img src="${loginUser.url}" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">${loginUser.uname}</cite></a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>个人资料</cite></a></dd>
                         <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="seraph icon-xiugai" data-icon="icon-xiugai"></i><cite>修改密码</cite></a></dd>
@@ -70,7 +70,7 @@
     <!-- 左侧导航 -->
     <div class="layui-side layui-bg-black">
         <div class="user-photo">
-            <a class="img" title="我的头像" ><img src="images/face.jpg" class="userAvatar"></a>
+            <a class="img" title="我的头像" ><img src="${loginUser.url}" class="userAvatar"></a>
             <p>你好！<span class="userName"></span>, 欢迎登录</p>
         </div>
         <!-- 搜索 -->
@@ -130,6 +130,7 @@
     //保存用户登录信息
     sessionStorage.setItem("uid",${loginUser.id})
     sessionStorage.setItem("uname","${loginUser.uname}")
+    sessionStorage.setItem("userUrl","${loginUser.url}")//用户头像地址
     sessionStorage.setItem("pwd","${loginUser.pwd}")
     sessionStorage.setItem("userRid","${loginUser.role.id}")//角色ID
     sessionStorage.setItem("classesId","${loginUser.classes.id}")//班级ID

@@ -33,4 +33,9 @@ public class UserServerImpl  implements UserServer{
     public int updatePwd(int id, String newpwd) {
         return userMapper.updatePwd(id,newpwd);
     }
+
+    @Override
+    public int userUpload(String url, int uid) {
+        return userMapper.userUpload(url,uid);
+    }
 }

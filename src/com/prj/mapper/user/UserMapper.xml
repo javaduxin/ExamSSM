@@ -9,6 +9,7 @@
         <id column="id" property="id"></id>
         <result column="uname" property="uname"></result>
         <result column="pwd" property="pwd"></result>
+        <result column="url" property="url"></result>
         <association property="role" resultMap="roleMap" javaType="Role"></association>
         <association property="classes" resultMap="ClassMap" javaType="Classes"></association>
     </resultMap>
@@ -43,4 +44,8 @@
         SELECT u.*,r.id rid,c.id cid,r.rname,c.classesName FROM `user` u,role r,classes c WHERE u.rid=r.id AND c.id=u.typeclass AND  uname=#{uname} AND pwd=#{pwd}
     </select>
 
+    <!--//上传头像-->
+    <update id="userUpload">
+        UPDATE `user` SET url=#{url} WHERE id=#{uid}
+    </update>
 </mapper>

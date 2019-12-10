@@ -18,4 +18,7 @@ public interface UserServer {
 
     //修改密码
     public int updatePwd(int id,  String newpwd);
+
+    //上传头像
+    public int userUpload(String url,int uid);
 }
