@@ -16,4 +16,6 @@ public interface UserServer {
     //添加用户
     public int addUser(User user);
 
+    //修改密码
+    public int updatePwd(int id,  String newpwd);
 }

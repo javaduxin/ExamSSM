@@ -28,4 +28,9 @@ public class UserServerImpl  implements UserServer{
     public int addUser(User user) {
         return userMapper.addUser(user);
     }
+
+    @Override
+    public int updatePwd(int id, String newpwd) {
+        return userMapper.updatePwd(id,newpwd);
+    }
 }

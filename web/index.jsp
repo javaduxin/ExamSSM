@@ -130,6 +130,7 @@
     //保存用户登录信息
     sessionStorage.setItem("uid",${loginUser.id})
     sessionStorage.setItem("uname","${loginUser.uname}")
+    sessionStorage.setItem("pwd","${loginUser.pwd}")
     sessionStorage.setItem("userRid","${loginUser.role.id}")//角色ID
     sessionStorage.setItem("classesId","${loginUser.classes.id}")//班级ID
     sessionStorage.setItem("classesName","${loginUser.classes.classesName}")//班级

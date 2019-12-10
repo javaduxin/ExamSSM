@@ -4,6 +4,7 @@ import com.prj.entity.Classes;
 import com.prj.entity.Role;
 import com.prj.entity.User;
 import com.prj.server.user.UserServer;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -159,8 +160,30 @@ public class UserController {
         } catch (Exception e) {
             return null;
         }
+    }
+
+
+    //修改密码
+    @ResponseBody
+    @RequestMapping("/updatePwd")
+    public String updatePwd(int id, String newPwd, String oldPwd, HttpSession session){
+
+        User user=(User)session.getAttribute("loginUser");
+        //判断提交过来的旧密码与登录密码是否一致
+        if(string2MD5(oldPwd).equals(user.getPwd())){
+           //执行修改密码
+            userServer.updatePwd(user.getId(),string2MD5(newPwd));
+
+            return "修改密码成功！";
+        }else {
+            return "旧密码错误，请重新输入！";
+        }
+
+
 
     }
+
+
 }
 
 

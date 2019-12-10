@@ -6,12 +6,29 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
+
+    //获取登录者的姓名
+    $("#uname").val(sessionStorage.getItem("uname"));
+    //获取登录者的ID
+    $("#uid").val(sessionStorage.getItem("uid"));
+
+    //提交表单
+    form.on('submit',function (layuidata){
+        $.ajax({
+            url:"/updatePwd",
+            data:{"id":$("#uid").val(),"oldPwd":$("#oldPwd").val(),"newPwd":$("#newPwd").val()},
+            success:function (data){
+                layer.msg(data);
+            }
+        })
+    })
+
     //添加验证规则
     form.verify({
         oldPwd : function(value, item){
-            if(value != "123456"){
-                return "密码错误，请重新输入！";
-            }
+            /*if(value != sessionStorage.getItem("pwd")){
+                return "旧密码错误，请重新输入！";
+            }*/
         },
         newPwd : function(value, item){
             if(value.length < 6){
@@ -19,7 +36,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             }
         },
         confirmPwd : function(value, item){
-            if(!new RegExp($("#oldPwd").val()).test(value)){
+            if(!new RegExp($("#newPwd").val()).test($("#newPwd1").val())){
                 return "两次输入密码不一致，请重新输入！";
             }
         }
