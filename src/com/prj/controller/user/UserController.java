@@ -27,6 +27,7 @@ import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -199,16 +200,16 @@ public class UserController {
         //判断用户是否选择文件
         //isEmpty()判断文件是否为空
         if(!myfile.isEmpty()){
-
+            String fileName=UUID.randomUUID().toString();
             //获取上传的服务器地址
             String url=request.getSession().getServletContext().getRealPath("/upload/");
             //创建文件对象getOriginalFilename()获取文件名称
-            File file=new File(url+myfile.getOriginalFilename());
+            File file=new File(url+ fileName +myfile.getOriginalFilename());
             //把文件复制到目标地址FileUtils.copyInputStreamToFile(文件对象，目标地址对象)
             FileUtils.copyInputStreamToFile(myfile.getInputStream(),file);
 
             User user=(User)session.getAttribute("loginUser");
-            userServer.userUpload("/upload/"+myfile.getOriginalFilename(),user.getId());
+            userServer.userUpload("/upload/"+ fileName+myfile.getOriginalFilename(),user.getId());
 
         }
         Map<String,Object> map = new HashMap<String,Object>();
