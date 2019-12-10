@@ -16,11 +16,19 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     form.on('submit',function (layuidata){
         $.ajax({
             url:"/updatePwd",
+            contentType: 'text/json,charset=utf-8',
+            dataType: 'json',
             data:{"id":$("#uid").val(),"oldPwd":$("#oldPwd").val(),"newPwd":$("#newPwd").val()},
             success:function (data){
-                layer.msg(data);
+                layer.msg(data.msg);
+                window.sessionStorage.clear();
+                window.localStorage.clear();
+                setTimeout(function(){
+                    window.top.location.href="http://localhost:8088";//直接访问服务器，过滤器自动弹出登录
+                },1000);
             }
         })
+        return false;
     })
 
     //添加验证规则
@@ -43,7 +51,7 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
     })
 
     //用户等级
-    table.render({
+    /*table.render({
         elem: '#userGrade',
         url : '../../json/userGrade.json',
         cellMinWidth : 95,
@@ -56,9 +64,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             {field: 'gradePoint', title: '默认积分', edit: 'text',sort:"true", align:'center'},
             {title: '当前状态',minWidth:100, templet:'#gradeBar',fixed:"right",align:"center"}
         ]]
-    });
+    });*/
 
-    form.on('switch(gradeStatus)', function(data){
+    /*form.on('switch(gradeStatus)', function(data){
         var tipText = '确定禁用当前会员等级？';
         if(data.elem.checked){
             tipText = '确定启用当前会员等级？'
@@ -78,9 +86,9 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             form.render();
             layer.close(index);
         });
-    });
+    });*/
     //新增等级
-    $(".addGrade").click(function(){
+    /*$(".addGrade").click(function(){
         var $tr = $(".layui-table-body.layui-table-main tbody tr:last");
         if($tr.data("index") < 9) {
             var newHtml = '<tr data-index="' + ($tr.data("index") + 1) + '">' +
@@ -99,11 +107,11 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
         }else{
             layer.alert("模版中由于图标数量的原因，只支持到vip10，实际开发中可根据实际情况修改。当然也不要忘记增加对应等级的颜色。",{maxWidth:300});
         }
-    });
+    });*/
 
     //控制表格编辑时文本的位置【跟随渲染时的位置】
-    $("body").on("click",".layui-table-body.layui-table-main tbody tr td",function(){
+    /*$("body").on("click",".layui-table-body.layui-table-main tbody tr td",function(){
         $(this).find(".layui-table-edit").addClass("layui-"+$(this).attr("align"));
-    });
+    });*/
 
 })

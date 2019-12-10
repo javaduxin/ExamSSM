@@ -19,6 +19,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @Controller
@@ -166,20 +168,24 @@ public class UserController {
     //修改密码
     @ResponseBody
     @RequestMapping("/updatePwd")
-    public String updatePwd(int id, String newPwd, String oldPwd, HttpSession session){
+    public Map<String,Object> updatePwd(int id, String newPwd, String oldPwd, HttpSession session){
 
+        Map<String,Object> map = new HashMap<String,Object>();
+        //返回json
         User user=(User)session.getAttribute("loginUser");
         //判断提交过来的旧密码与登录密码是否一致
         if(string2MD5(oldPwd).equals(user.getPwd())){
            //执行修改密码
             userServer.updatePwd(user.getId(),string2MD5(newPwd));
+            map.put("msg","修改密码成功");
+            //销毁后台session
+            session.invalidate();
 
-            return "修改密码成功！";
         }else {
-            return "旧密码错误，请重新输入！";
+            map.put("msg","旧密码错误，请重新输入！");
         }
 
-
+        return map;
 
     }
 
