@@ -21,11 +21,14 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
             data:{"id":$("#uid").val(),"oldPwd":$("#oldPwd").val(),"newPwd":$("#newPwd").val()},
             success:function (data){
                 layer.msg(data.msg);
-                window.sessionStorage.clear();
-                window.localStorage.clear();
-                setTimeout(function(){
-                    window.top.location.href="http://localhost:8088";//直接访问服务器，过滤器自动弹出登录
-                },1000);
+
+                if("修改密码成功"==data.msg){
+                    window.sessionStorage.clear();
+                    window.localStorage.clear();
+                    setTimeout(function(){
+                        window.top.location.href="http://localhost:8088";//直接访问服务器，过滤器自动弹出登录
+                    },1000);
+                }
             }
         })
         return false;
