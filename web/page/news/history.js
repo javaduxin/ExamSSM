@@ -171,15 +171,15 @@ layui.use(['form','layer','laydate','table','laytpl'],function(){
                     for(var i=0;i<infos.length;i++){
 
                         if(answer[i]=="A"&&infos[i]=="1"){
-                            html+='<button type="button" class="layui-btn">'+infos[i]+'</button> ';
+                            html+='<button type="button" class="layui-btn">A</button> ';
                         } else if(answer[i]=="B"&&infos[i]=="2"){
-                            html+='<button type="button" class="layui-btn">'+infos[i]+'</button> ';
+                            html+='<button type="button" class="layui-btn">B</button> ';
                         } else if(answer[i]=="C"&&infos[i]=="3"){
-                            html+='<button type="button" class="layui-btn">'+infos[i]+'</button> ';
+                            html+='<button type="button" class="layui-btn">C</button> ';
                         } else if(answer[i]=="D"&&infos[i]=="4"){
-                            html+='<button type="button" class="layui-btn">'+infos[i]+'</button> ';
+                            html+='<button type="button" class="layui-btn">D</button> ';
                         }else{
-                            html+='<button type="button"  class="layui-btn layui-btn-danger">'+infos[i]+'</button> ';
+                            html+='<button type="button"  class="layui-btn layui-btn-danger">'+answer[i]+'</button> ';
                         }
                     }
                     html+= '</div>';
