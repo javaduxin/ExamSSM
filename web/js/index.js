@@ -27,6 +27,7 @@ layui.use(['bodyTab','form','element','layer','jquery'],function(){
 				}
 				//学生
 				if(sessionStorage.getItem("userRid")==2){
+                    contentManagement.push(data.contentManagement[1]);
                     contentManagement.push(data.contentManagement[2]);
 				}
 				//老师

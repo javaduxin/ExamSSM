@@ -41,7 +41,7 @@
          AND c.id=cm.classid
          AND m.id=cm.menuid
          AND m.ispublic=1
-         AND m.id NOT IN (SELECT r.mid FROM result r WHERE r.mid=m.id)
+         AND u.id NOT IN (SELECT r.uid FROM result r WHERE r.mid=m.id)
          AND u.id=#{id}
 
     </select>
