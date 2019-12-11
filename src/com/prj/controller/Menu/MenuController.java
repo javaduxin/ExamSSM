@@ -191,7 +191,12 @@ public class MenuController {
     }
 
 
-
+    //加载考试正确答案
+    @ResponseBody
+    @RequestMapping("/queryExamAnswer")
+    public List<Exam> queryExamAnswer(long mid){
+        return menuServer.queryExamAnswer(mid);
+    }
 
 
 }

@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface MenuServer {
 
+
+    ////查询考试答案
+    public List<Exam> queryExamAnswer(long mid);
+
     //交卷
     public int insertResult(ResultVO resultVO);
 

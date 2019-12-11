@@ -204,12 +204,15 @@ public class UserController {
             //获取上传的服务器地址
             String url=request.getSession().getServletContext().getRealPath("/upload/");
             //创建文件对象getOriginalFilename()获取文件名称
-            File file=new File(url+ fileName +myfile.getOriginalFilename());
+            File file=new File(url+"/"+ fileName +myfile.getOriginalFilename());
             //把文件复制到目标地址FileUtils.copyInputStreamToFile(文件对象，目标地址对象)
             FileUtils.copyInputStreamToFile(myfile.getInputStream(),file);
 
             User user=(User)session.getAttribute("loginUser");
+            user.setUrl("/upload/"+ fileName+myfile.getOriginalFilename());
             userServer.userUpload("/upload/"+ fileName+myfile.getOriginalFilename(),user.getId());
+
+            session.setAttribute("loginUser",user);
 
         }
         Map<String,Object> map = new HashMap<String,Object>();

@@ -44,6 +44,11 @@ public class MenuServerImpl implements MenuServer{
     }
 
     @Override
+    public List<Exam> queryExamAnswer(long mid) {
+        return menuMapper.queryExamAnswer(mid);
+    }
+
+    @Override
     public int insertResult(ResultVO resultvo) {
 
         //获取学生选择的答案

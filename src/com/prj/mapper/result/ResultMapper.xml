@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间必须是接口-->
+<mapper namespace="com.prj.mapper.result.ResultMapper">
+
+    <!--maper-->
+    <!--考试结果-->
+    <resultMap id="resultMap" type="Result">
+        <id column="id" property="id"></id>
+        <result column="result" property="result"></result>
+        <result column="time" property="time"></result>
+        <result column="info" property="info"></result>
+        <association property="user" resultMap="userMap" javaType="User"></association>
+        <association property="menu" resultMap="menuMap" javaType="Menu"></association>
+    </resultMap>
+    <!--用户map-->
+    <resultMap id="userMap" type="User">
+        <id column="uid" property="id"></id>
+        <result column="uname" property="uname"></result>
+    </resultMap>
+    <!--考试map-->
+    <resultMap id="menuMap" type="Menu">
+        <id column="mid" property="id"></id>
+        <result column="mtitle" property="title"></result>
+    </resultMap>
+
+    <!--查询正确答案-->
+    <select id="queryResult" resultMap="resultMap">
+        SELECT r.id,u.id uid,u.uname,m.id mid,m.title mtitle,r.result,r.time,r.info
+         FROM `result` r,USER u,menu m
+         WHERE u.id=r.uid AND m.id=r.mid
+    </select>
+
+
+
+</mapper>

@@ -23,7 +23,7 @@ layui.use(['form','layer','upload','laydate',"address"],function(){
         field:"myfile",
         method : "get",  //此处是为了演示之用，实际使用中请将此删除，默认用post方式提交
         done: function(res, index, upload){
-            layer.msg("替换头像成功,请重新登录");
+            layer.msg("替换头像成功,请重新刷新页面");
         },before: function(obj){
             //预读本地文件示例，不支持ie8
             obj.preview(function(index, file, result){
